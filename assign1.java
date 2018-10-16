@@ -6,17 +6,17 @@
  *     * @version: 016/10/2018
  *      * Description: Parses XML file and saves data as Station objects and associated StationEdge objects
  *       */
+import java.io.File;
+
 import java.util.List;
 import java.util.ArrayList;
-import javax.xml.parsers.DocumentBuilder; 
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import java.io.File;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder; 
+import javax.xml.parsers.DocumentBuilderFactory;
 // TODO THE RAIL NETWORK SHOULD BE PASSED TO YOUR PROGRAM AS AN INPUT
 // Q1
 // Q2 (extra)
@@ -31,7 +31,7 @@ public class assign1
 	public static void main(String args[]) throws Exception
 	{
 		// String RailNetwork = args[0];	// the XML file will be given as a command line argument and savede to this variable
-		// String stationOne args[1];		// commented out for manual testing
+		// String stationOne args[1];		// commented out for now while we do manual testing
 		// String stationTwo args[2];
 		// String optimisationCriteria args[3];
 		//
@@ -80,9 +80,10 @@ public class assign1
 	// algorithm uses average time for travelling between adjacent stations (duration)
 	// and a flat time of 15 minutes to change from one line to another
 
-	// calculate best route between two stations using according to optimisationCriteria
+	// calculate best route between two stations according to optimisationCriteria
 	public void bestRoute(String stationOne, String stationTwo, String optimisationCriteria)
 	{
+		// OUTPUTS AS FOLLOWS:
 		// From X, take line a to station Z;
 		// then change to line b, and continue to W;
 		// ...
