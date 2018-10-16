@@ -1,3 +1,12 @@
+/**
+ * *
+ *  * StationEdge.java – Assignment1
+ *   * @author: Jeremiah Smith, Juyong Kim
+ *    * @student Number: c3238179 cXXXXXXX
+ *     * @version: 016/10/2018
+ *      * Description: Holds information to create and store a StationEdge object
+ *       */
+
 public class StationEdge
 {
 	private String Name;
