@@ -14,14 +14,12 @@ public class Station
 {
 	private String Name;
 	private String Line;
-	private NodeList edges;
 	private ArrayList<StationEdge> Edges;
 
 	public Station(String Name, String Line, NodeList edges)
 	{
 		this.Name = Name;
 		this.Line = Line;
-		this.edges = edges;
 		this.Edges = new ArrayList<StationEdge>();
 		for (int i = 1; i < edges.getLength(); i = i + 2)
 		{
