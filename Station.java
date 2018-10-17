@@ -1,3 +1,11 @@
+/**
+ * *
+ *  * Station.java – Assignment1
+ *   * @author: Jeremiah Smith, Juyong Kim
+ *    * @student Number: c3238179 cXXXXXXX
+ *     * @version: 016/10/2018
+ *      * Description: Holds information to create and store a Station object
+ *       */
 import java.util.ArrayList;
 
 import org.w3c.dom.NodeList;
