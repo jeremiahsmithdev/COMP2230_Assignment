@@ -1,120 +1,96 @@
+/**
+ * *
+ *  * assign1.java – Assignment1
+ *   * @author: Jeremiah Smith, Juyong Kim
+ *    * @student Number: c3238179 cXXXXXXX
+ *     * @version: 016/10/2018
+ *      * Description: Parses XML file and saves data as Station objects and associated StationEdge objects
+ *       */
+//Just seeing if changes get updated
+import java.io.File;
+
 import java.util.List;
 import java.util.ArrayList;
-// These are the JAXP APIs used by DOMEcho:
 
-// package dom;
-import javax.xml.parsers.DocumentBuilder; 
-import javax.xml.parsers.DocumentBuilderFactory;
-// These classes are for the exceptions that can be thrown when the XML document is parsed:
-
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException; 
-import org.xml.sax.SAXParseException;
-import org.xml.sax.helpers.*;
-// These classes read the sample XML file and manage output:
-
-import java.io.File;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-// Finally, import the W3C definitions for a DOM, DOM exceptions, entities and nodes:
-
-import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
-import org.w3c.dom.Entity;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder; 
+import javax.xml.parsers.DocumentBuilderFactory;
+// TODO THE RAIL NETWORK SHOULD BE PASSED TO YOUR PROGRAM AS AN INPUT
+// Q1
+// Q2 (extra)
 
-class MyErrorHandler implements ErrorHandler { // private static
-     
-    private PrintWriter out;
+// EXAMPLE USE OF PROGRAM:
+// java assign1 RailNetwork.XML X Y optimisationCriteria
+// where X and Y are the names of two stations and optimisationCriteria is the additional criteria that the algorithm must be optomised for
 
-    MyErrorHandler(PrintWriter out) {
-        this.out = out;
-    }
-
-    private String getParseExceptionInfo(SAXParseException spe) {
-        String systemId = spe.getSystemId();
-        if (systemId == null) {
-            systemId = "null";
-        }
-
-        String info = "URI=" + systemId + " Line=" + spe.getLineNumber() +
-                      ": " + spe.getMessage();
-        return info;
-    }
-
-    public void warning(SAXParseException spe) throws SAXException {
-        out.println("Warning: " + getParseExceptionInfo(spe));
-    }
-        
-    public void error(SAXParseException spe) throws SAXException {
-        String message = "Error: " + getParseExceptionInfo(spe);
-        throw new SAXException(message);
-    }
-
-    public void fatalError(SAXParseException spe) throws SAXException {
-        String message = "Fatal Error: " + getParseExceptionInfo(spe);
-        throw new SAXException(message);
-    }
-}
-
+// main class
 public class assign1
 {
 	public static void main(String args[]) throws Exception
 	{
-		File file = new File("RailNetwork.xml");
-		System.out.println(file.canExecute());
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+		// String RailNetwork = args[0];	// the XML file will be given as a command line argument and savede to this variable
+		// String stationOne args[1];		// commented out for now while we do manual testing
+		// String stationTwo args[2];
+		// String optimisationCriteria args[3];
+		//
+		// XML FILE PARSING BEGIN
+		File file = new File("RailNetwork.xml");	// this will be changed so that the rail network is passed to program as an input
+		// File file = new File(RailNetwork);		// done as above, commented out for easier testing
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory         // instantiates an instance of this library for parsing
 			.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(file);
+		Document document = documentBuilder.parse(file);                               // this is the important part, 'document' is our XML file
 
-		NodeList stationList = document.getElementsByTagName("Station");
-		System.out.println("Total of elements : " + stationList.getLength());
-		int stations = stationList.getLength();
+		NodeList stationList = document.getElementsByTagName("Station");               // splits document into nodes by Station tag
 
-		System.out.println(stations + " stations");
+		NodeList stationNodes = document.getElementsByTagName("Station");              // splits stations into nodes for each tag
+		List<Station> list = new ArrayList<Station>();                                 // this will hold all of our Station objects
+		for (int i = 0; i < stationNodes.getLength(); i++)                             // we parse the file and create Station objects within this loop
+		{
+			NodeList stationAttributes = stationNodes.item(i).getChildNodes();     // splits this stationNode into its child elements
+			String Name = stationAttributes.item(1).getTextContent();              // station Name recorded
+			String Line = stationAttributes.item(3).getTextContent();              // station Line recorded
+			NodeList stationEdges = stationAttributes.item(5).getChildNodes();     // edges element split into child nodes for each edge
 
-		String name = document.getElementsByTagName("Name").item(0).getTextContent();
-		String line = document.getElementsByTagName("Line").item(0).getTextContent();
+			list.add(new Station(Name, Line, stationEdges));                       // recorded data is sent to the Station constructor
+		}
+		// XML FILE PARSING END
 
-		// System.out.println("last station is " + document.getElementsByTagName("Station").item(stations).getAttribute());//.getContent().getElementsByTagName("Name").getTextContent());
-		 System.out.println("Root element: " + document.getDocumentElement().getNodeName());
+		// prints stored object data in order of XML file
+		// this is not used, just a demonstration that the information has been stored correctly
+		for (int i = 0; i < stationNodes.getLength(); i++)
+		{
+			System.out.println("Station Name: " +list.get(i).getName());
+			System.out.println("Line: "+list.get(i).getLine());
+			for (int a = 0; a < list.get(i).getEdges().size(); a++)
+			{
+				System.out.println("	Edge:");
+				System.out.println("		Name: "+list.get(i).getEdges().get(a).getName());
+				System.out.println("		Line: "+list.get(i).getEdges().get(a).getLine());
+				System.out.println("		Duration: "+list.get(i).getEdges().get(a).getDuration());
+			}
+		}
+		// program calculates and returns information about the bestRoute(stationOne, stationTwo, optimisationCriteria)
+		// using the two stations provided as command line arguments
 
-		 NodeList stationNodes = document.getElementsByTagName("Station");
-		 List<Station> list = new ArrayList<Station>();
-		 for (int i = 0; i < stationNodes.getLength(); i++)
-		 {
-			 NodeList stationAttributes = stationNodes.item(i).getChildNodes();
-			 String Name = stationAttributes.item(1).getTextContent();
-			 String Line = stationAttributes.item(3).getTextContent();
-			 // System.out.println(stationAttributes.item(5).getNodeName());
-			 NodeList stationEdges = stationAttributes.item(5).getChildNodes();
-
-			 System.out.println(i);
-			 list.add(new Station(Name, Line, stationEdges));
-
-		 }
-
-		 // prints stored object data in order of XML file
-		 for (int i = 0; i < stationNodes.getLength(); i++)
-		 {
-			 System.out.println("Station Name: " +list.get(i).getName());
-			 System.out.println("Line: "+list.get(i).getLine());
-			 for (int a = 0; a < list.get(i).getEdges().size(); a++)
-			 {
-				 System.out.println("	Edge:");
-				 System.out.println("		Name: "+list.get(i).getEdges().get(a).getName());
-				 System.out.println("		Line: "+list.get(i).getEdges().get(a).getLine());
-				 System.out.println("		Duration: "+list.get(i).getEdges().get(a).getDuration());
-			 }
-		 }
-
-
-
-		// System.out.println(name);
-		// System.out.println(line);
 	}
+	// RULES
+	// algorithm uses average time for travelling between adjacent stations (duration)
+	// and a flat time of 15 minutes to change from one line to another
+
+	// calculate best route between two stations according to optimisationCriteria
+	public void bestRoute(String stationOne, String stationTwo, String optimisationCriteria)
+	{
+		// OUTPUTS AS FOLLOWS:
+		// From X, take line a to station Z;
+		// then change to line b, and continue to W;
+		// ...
+		// then change to line c, and continue to Y.
+		// The total trip will have m changes and will take approximately n minutes.
+	}
+	// optimisationCriteria can be either 'time' or 'changes' i.e. optimize for the least of whichever is chosen on program initiation
+	// if there are multiple optimal results satisfying the chosen criterion, then output the one that optimises the other criterion
 }
