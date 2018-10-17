@@ -6,7 +6,10 @@
  *     * @version: 016/10/2018
  *      * Description: Parses XML file and saves data as Station objects and associated StationEdge objects
  *       */
+<<<<<<< HEAD
 //Just seeing if changes get updated
+=======
+>>>>>>> 0a1bdd9603849f2cfb63357fc8d66e755b4fe144
 import java.io.File;
 
 import java.util.List;
