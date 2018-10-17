@@ -9,6 +9,7 @@
 
 // TODO NOTE: See resource - http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 import java.util.List;
+import java.util.ArrayList;
 
 public class Graph
 {
@@ -17,8 +18,17 @@ public class Graph
 
 	public Graph(List<Station> vertices, List<StationEdge> edges)
 	{
-		this.vertices = vertices;
-		this.edges = edges;
+		this.vertices = vertices;	// vertices passed as stationList from main
+		this.edges = new ArrayList<StationEdge>();
+
+		// add the respective StationEdges for each Station
+		for (int i = 0; i < vertices.size(); i++)
+		{
+			for (int a = 0; a < vertices.get(i).getEdges().size(); i++)
+			{
+				edges.add(vertices.get(i).getEdges().get(1));
+			}
+		}
 	}
 
 	public List<Station> getVertices()
