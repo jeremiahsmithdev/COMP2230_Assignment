@@ -6,6 +6,7 @@
  *     * @version: 016/10/2018
  *      * Description: Holds information to create and store a Station object
  *       */
+// TODO modify according to http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 import java.util.ArrayList;
 
 import org.w3c.dom.NodeList;
