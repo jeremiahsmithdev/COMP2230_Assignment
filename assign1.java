@@ -72,6 +72,10 @@ public class assign1
 				System.out.println("		Duration: "+list.get(i).getEdges().get(a).getDuration());
 			}
 		}
+		// TODO - Create graph:
+		// Graph graph = new Graph(listOfStations, listOfStationEdges)
+		//
+		// TODO - calculate best route using graph and bestRoute()
 		// program calculates and returns information about the bestRoute(stationOne, stationTwo, optimisationCriteria)
 		// using the two stations provided as command line arguments
 
