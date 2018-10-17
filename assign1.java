@@ -6,6 +6,7 @@
  *     * @version: 016/10/2018
  *      * Description: Parses XML file and saves data as Station objects and associated StationEdge objects
  *       */
+//Checking if stuff works well now also on my school computer
 import java.io.File;
 
 import java.util.List;
