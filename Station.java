@@ -9,8 +9,7 @@
 // TODO modify according to http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 import java.util.ArrayList;
 import java.util.List;
-import org.w3c.dom.NodeList;
-
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Station
@@ -48,7 +47,7 @@ public class Station
 
 		for(int i=0; i < stations.getLength(); i++)
 		{
-			if(stations.get(i).getName()==name &&stations.get(i).getLine()==line)
+			if(stations.get(i).getName()==name && stations.get(i).getLine()==line)
 			{
 				return stations.get(i);
 			}
