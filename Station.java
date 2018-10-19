@@ -36,14 +36,14 @@ public class Station
 	{
 		for (int i = 1; i < xmlEdges.getLength(); i = i + 2)
 		{
-			System.out.println(i);
+//			System.out.println(i);
 			NodeList edgeAttributes = xmlEdges.item(i).getChildNodes();
 			String name = edgeAttributes.item(1).getTextContent();
-			System.out.println(name);
+//			System.out.println(name);
 			String line = edgeAttributes.item(3).getTextContent();
-			System.out.println(line);
+//			System.out.println(line);
 			int duration = Integer.parseInt(edgeAttributes.item(5).getTextContent());
-			System.out.println("duration = "+edgeAttributes.item(5).getNodeName());
+//			System.out.println("duration = "+duration);
 			Edges.add(new StationEdge(name, line, duration, this , findDestination(name, line, stations)));
 		}
 	}
@@ -52,7 +52,7 @@ public class Station
 		Station destination = new Station();
 		for(int i=0; i < stations.size(); i++)
 		{
-			if(stations.get(i).getName()==name && stations.get(i).getLine()==line)
+			if(stations.get(i).getName().equals(name) && stations.get(i).getLine().equals(line))
 			{
 				destination = stations.get(i);
 			}

@@ -63,6 +63,7 @@ public class assign1
 			list.get(i).initializeEdges(list);
 		}
 
+
 		// XML FILE PARSING END
 
 		// prints stored object data in order of XML file
@@ -77,6 +78,8 @@ public class assign1
 				System.out.println("		Name: "+list.get(i).getEdges().get(a).getName());
 				System.out.println("		Line: "+list.get(i).getEdges().get(a).getLine());
 				System.out.println("		Duration: "+list.get(i).getEdges().get(a).getDuration());
+				System.out.println("		Source: "+list.get(i).getEdges().get(a).getSource().getName());
+				System.out.println("		Destination: "+list.get(i).getEdges().get(a).getDestination().getName());
 			}
 		}
 		// TODO - Create graph:
