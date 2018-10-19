@@ -20,6 +20,11 @@ public class Station
 	private ArrayList<StationEdge> Edges;
 	private NodeList xmlEdges;
 
+	public Station()
+	{
+
+	}
+
 	public Station(String Name, String Line, NodeList xmlEdges)
 	{
 		this.Name = Name;
@@ -45,14 +50,15 @@ public class Station
 	}
 	public Station findDestination(String name, String line, List<Station> stations)
 	{
-
-		for(int i=0; i < stations.getLength(); i++)
+		Station destination = new Station();
+		for(int i=0; i < stations.size(); i++)
 		{
 			if(stations.get(i).getName()==name &&stations.get(i).getLine()==line)
 			{
-				return stations.get(i);
+				destination = stations.get(i);
 			}
 		}
+		return destination;
 
 	}
 	public ArrayList<StationEdge> getEdges()

@@ -14,11 +14,11 @@ public class StationEdge
 	private String Line;
 	private int Duration;
 	//additions based off the vogella
-	private String Source;
-	private String Destination;
+	private Station Source;
+	private Station Destination;
 
 	//constructor
-	public StationEdge(String Name, String Line, int Duration, String Source, String Destination)
+	public StationEdge(String Name, String Line, int Duration, Station Source, Station Destination)
 	{
 		this.Name = Name;
 		this.Line = Line;
@@ -40,11 +40,11 @@ public class StationEdge
 	{
 		return Duration;
 	}
-	public String getSource()
+	public Station getSource()
 	{
 		return Source;
 	}
-	public String getDestination()
+	public Station getDestination()
 	{
 		return Destination;
 	}
