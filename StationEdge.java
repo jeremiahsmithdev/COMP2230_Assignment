@@ -12,12 +12,8 @@ public class StationEdge
 {
 	private String Name;
 	private String Line;
-<<<<<<< HEAD
 	private int Duration;
 	//additions based off the vogella
-=======
-	private int Duration;i
->>>>>>> 9e687ae0f087d65ed9686596d8b209419818b778
 	private Station Source;
 	private Station Destination;
 
