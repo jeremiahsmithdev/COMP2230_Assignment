@@ -57,6 +57,12 @@ public class assign1
 
 			list.add(new Station(Name, Line, stationEdges));                       // recorded data is sent to the Station constructor
 		}
+
+		for (int i = 0; i < stationNodes.getLength(); i++)                             // we parse the file and create Station objects within this loop
+		{
+			list.get(i).initializeEdges(list);
+		}
+
 		// XML FILE PARSING END
 
 		// prints stored object data in order of XML file
@@ -79,7 +85,6 @@ public class assign1
 		// TODO - calculate best route using graph and bestRoute()
 		// program calculates and returns information about the bestRoute(stationOne, stationTwo, optimisationCriteria)
 		// using the two stations provided as command line arguments
-
 	}
 	// RULES
 	// algorithm uses average time for travelling between adjacent stations (duration)
