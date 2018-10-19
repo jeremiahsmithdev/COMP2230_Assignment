@@ -40,13 +40,20 @@ public class Station
 			System.out.println(line);
 			int duration = Integer.parseInt(edgeAttributes.item(5).getTextContent());
 			System.out.println("duration = "+edgeAttributes.item(5).getNodeName());
-			Edges.add(new StationEdge(name, line, duration, this, findDestination(name, line, stations)));
+			Edges.add(new StationEdge(name, line, duration, this , findDestination(name, line, stations)));
 		}
 	}
 	public Station findDestination(String name, String line, List<Station> stations)
 	{
 
-		return ;
+		for(int i=0; i < stations.getLength(); i++)
+		{
+			if(stations.get(i).getName()==name &&stations.get(i).getLine()==line)
+			{
+				return stations.get(i);
+			}
+		}
+
 	}
 	public ArrayList<StationEdge> getEdges()
 	{
