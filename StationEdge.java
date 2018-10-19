@@ -12,14 +12,11 @@ public class StationEdge
 {
 	private String Name;
 	private String Line;
-<<<<<<< HEAD
 	private int Duration;
 	//additions based off the vogella
-=======
-	private int Duration;i
->>>>>>> 9e687ae0f087d65ed9686596d8b209419818b778
 	private Station Source;
 	private Station Destination;
+	private int defaultTime;
 
 	//constructor
 	public StationEdge(String Name, String Line, int Duration, Station Source, Station Destination)
@@ -29,6 +26,7 @@ public class StationEdge
 		this.Duration = Duration;
 		this.Source = Source;
 		this.Destination = Destination;
+		defaultTime = 1;
 	}
 
 	//getters
@@ -52,7 +50,10 @@ public class StationEdge
 	{
 		return Destination;
 	}
-
+	public int getDefault()
+	{
+		return defaultTime;
+	}
 	//side note, may or may not use
 	//used for printing 
 	@Override
