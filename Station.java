@@ -14,6 +14,8 @@ import org.w3c.dom.NodeList;
 public class Station
 {
 	private String Name;
+	//Since with xml, the same station different line is counted
+	//as a different station
 	private String Line;
 	private ArrayList<StationEdge> Edges;
 
@@ -32,7 +34,7 @@ public class Station
 			System.out.println(line);
 			int duration = Integer.parseInt(edgeAttributes.item(5).getTextContent());
 			System.out.println("duration = "+edgeAttributes.item(5).getNodeName());
-			Edges.add(new StationEdge(name, line, duration));
+			Edges.add(new StationEdge(name, line, duration)); //, source, destination));
 		}
 	}
 
