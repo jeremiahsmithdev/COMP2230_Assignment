@@ -8,6 +8,7 @@
  *       */
 // TODO modify according to http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 import java.util.ArrayList;
+import java.util.List;
 import org.w3c.dom.NodeList;
 
 import org.w3c.dom.NodeList;
@@ -27,7 +28,7 @@ public class Station
 		this.xmlEdges = xmlEdges;
 	}
 
-	public void initializeEdges()
+	public void initializeEdges(List<Station> stations)
 	{
 		for (int i = 1; i < xmlEdges.getLength(); i = i + 2)
 		{
@@ -39,8 +40,13 @@ public class Station
 			System.out.println(line);
 			int duration = Integer.parseInt(edgeAttributes.item(5).getTextContent());
 			System.out.println("duration = "+edgeAttributes.item(5).getNodeName());
-			Edges.add(new StationEdge(name, line, duration, this, stationDestination));
+			Edges.add(new StationEdge(name, line, duration, this, findDestination(name, line, stations)));
 		}
+	}
+	public Station findDestination(String name, String line, List<Station> stations)
+	{
+
+
 	}
 	public ArrayList<StationEdge> getEdges()
 	{

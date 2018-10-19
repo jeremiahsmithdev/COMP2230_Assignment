@@ -60,7 +60,7 @@ public class assign1
 
 		for (int i = 0; i < stationNodes.getLength(); i++)                             // we parse the file and create Station objects within this loop
 		{
-			list.get(i).instantiateEdges();
+			list.get(i).initializeEdges(list);
 		}
 
 		// XML FILE PARSING END
