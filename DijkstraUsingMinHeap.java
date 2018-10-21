@@ -2,6 +2,7 @@ import java.util.LinkedList;
 
 public class DijkstraUsingMinHeap 
 {
+    //class
     static class Edge 
     {
         int source;
@@ -16,13 +17,17 @@ public class DijkstraUsingMinHeap
         }
     }
 
+    //class
     static class HeapNode
     {
         int vertex;
         int distance;
     }
+
+    //class Graph and algorithm combined
     static class Graph 
     {
+        //graph generation starts here
         int vertices;
         LinkedList<Edge>[] adjacencylist;
 
@@ -46,6 +51,7 @@ public class DijkstraUsingMinHeap
             adjacencylist[destination].addFirst(edge); //for undirected graph
         }
 
+        //dijkstar algorithm starts here
         public void dijkstra_GetMinDistances(int sourceVertex){
             int INFINITY = Integer.MAX_VALUE;
             boolean[] SPT = new boolean[vertices];
@@ -125,6 +131,8 @@ public class DijkstraUsingMinHeap
             }
         }
     }
+
+    //class MinHeap
     static class MinHeap
     {
         int capacity;
@@ -237,7 +245,10 @@ public class DijkstraUsingMinHeap
             return currentSize;
         }
     }
+
+    //
     //primary running function
+    //
      public static void main(String[] args) 
      {
             int vertices = 6;

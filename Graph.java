@@ -29,6 +29,20 @@ public class Graph
 		}
 	}
 
+	//getters
+	public List<Station> findVertices(String station1)
+	{
+		Station destination = new Station();
+
+		for(int i=0; i < vertices.size(); i++)
+		{
+			if(vertices.get(i).getName().equals(station1))
+			{
+				destination = vertices.get(i);
+			}
+		}
+		return destination;
+	}
 	public List<Station> getVertices()
 	{
 		return vertices;
