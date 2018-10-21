@@ -2,12 +2,10 @@
  * *
  *  * Graph.java – Assignment1
  *   * @author: Jeremiah Smith, Juyong Kim
- *    * @student Number: c3238179 cXXXXXXX
- *     * @version: 017/10/2018
+ *    * @student Number: c3238179 c3244203
+ *     * @version: 017/10/2018 
  *      * Description: Describes a graph using Stations as vertices and StationEdges as Edges
  *       */
-
-// TODO NOTE: See resource - http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 import java.util.List;
 import java.util.ArrayList;
 

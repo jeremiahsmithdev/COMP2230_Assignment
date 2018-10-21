@@ -4,11 +4,11 @@
  *   * @author: Jeremiah Smith, Juyong Kim
  *    * @student Number: c3238179 c3244203
  *     * @version: 016/10/2018
- *      * Description: DijkstraAlgorithm that goes through the graph to produce a minheap of results
+ *      * Description: Saves values from the DijkstraAlgorithm in a min heap
  *       */
-public class DijkstraAlgorithm
+public class MinHeap
 {
-    public DijkstraAlgorithm() 
+    public MinHeap() 
     {
 
     }
