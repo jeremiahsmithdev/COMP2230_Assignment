@@ -18,13 +18,10 @@ public class DijkstraAlgorithm
     private Graph graph;
     private String station1,station2;
 
-    public DijkstraAlgorithm(Graph graph, String station1, String station2) 
+    //don't think you really need anything in the constructor
+    public DijkstraAlgorithm() 
     {
-        this.graph = graph;
-        this.station1 = station1;
-        this.station2 = station2;
-
-        getMinDuration(graph, station1,station2);
+        
     }
 
     public void getMinDuration(Graph graph, String station1, String station2)
@@ -86,6 +83,11 @@ public class DijkstraAlgorithm
                 }
             }
 
+            public void print()
+            {
+                System.out.println("Figure this out later");
+            }
+            
             public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
             {
                 //get the index which duraction's needs a decrease
@@ -99,10 +101,6 @@ public class DijkstraAlgorithm
                 minHeap.bubbleup(index);
             }
 
-            public void print()
-            {
-                System.out.println("Figure this out later");
-            }
         }
     }
 
