@@ -56,21 +56,54 @@ public class DijkstraAlgorithm
         while(!minHeap.isEmpty())
         {
             //extract the min
+            //of the minheap
             HeapNode extractedNode = minHeap.extractMin();
 
             //extracted vertex
             int extractedVertex = extracedNode.vertex;
             SPT[extractedVertex] = true;
 
-            //iterate through all the adjacent vertices
+//TODO I'm not sure how it will traverse through different lines
+//or even find the actual station it should be looking for
 
+            //iterate through all the adjacent vertices
+            for(int i = 0; i <graph.getEdges().size() ; i++)
+            {
+                int destination = graph.getEdges().get(i).getDuration();
+                if(SPT[destination]==false)
+                {
+                    ///check if duration needs an update or not
+                    //means check total weight from source to vertex_V is less than
+                    //the current distance value, if yes then update the distance
+                    int newKey = heapNodes[extracetedVertex].duration + graph.getEdges().get(i).getDuration();
+                    int currentKey = heapNodes[destination].duration;
+
+                    if(currentKey>newKey)
+                    {
+                        decreaseKey(minHeap, newKey, destination);
+                        heapNodes[destination].duration = newKey;
+                    }
+                }
+            }
+
+            public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
+            {
+                //get the index which duraction's needs a decrease
+                int index = minHeap.indexes[vertex];
+
+                //get the node and update its value from minheap
+//TODO HEAP NODE mh hasn't been created, since min heaap hasn't been made yet
+                HeapNode node = minHeap.mh[index];
+                node.duration = newKey;
+                //function within minHeap
+                minHeap.bubbleup(index);
+            }
+
+            public void print()
+            {
+                System.out.println("Figure this out later");
+            }
         }
     }
 
-}
-
-public class HeapNode
-{
-    int vertex;
-    int duration;
 }

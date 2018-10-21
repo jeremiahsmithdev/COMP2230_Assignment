@@ -24,6 +24,7 @@ public class Graph
 		{
 			for (int a = 0; a < vertices.get(i).getEdges().size(); i++)
 			{
+				//should this be 1 or i or a
 				edges.add(vertices.get(i).getEdges().get(1));
 			}
 		}

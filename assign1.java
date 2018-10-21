@@ -2,11 +2,10 @@
  * *
  *  * assign1.java – Assignment1
  *   * @author: Jeremiah Smith, Juyong Kim
- *    * @student Number: c3238179 cXXXXXXX
+ *    * @student Number: c3238179 c3244203
  *     * @version: 016/10/2018
  *      * Description: Parses XML file and saves data as Station objects and associated StationEdge objects
  *       */
-//Checking if stuff works well now also on my school computer
 import java.io.File;
 
 import java.util.List;
@@ -88,21 +87,23 @@ public class assign1
 		// TODO - calculate best route using graph and bestRoute()
 		// program calculates and returns information about the bestRoute(stationOne, stationTwo, optimisationCriteria)
 		// using the two stations provided as command line arguments
+
+//		DijkstraAlgorithm dij = new DijkstraAlgorithm(graph, station1, station2);
 	}
 	// RULES
 	// algorithm uses average time for travelling between adjacent stations (duration)
 	// and a flat time of 15 minutes to change from one line to another
 
 	// calculate best route between two stations according to optimisationCriteria
-	public void bestRoute(String stationOne, String stationTwo, String optimisationCriteria)
-	{
-		// OUTPUTS AS FOLLOWS:
-		// From X, take line a to station Z;
-		// then change to line b, and continue to W;
-		// ...
-		// then change to line c, and continue to Y.
-		// The total trip will have m changes and will take approximately n minutes.
-	}
+//	public void bestRoute(String stationOne, String stationTwo, String optimisationCriteria)
+//	{
+//		// OUTPUTS AS FOLLOWS:
+//		// From X, take line a to station Z;
+//		// then change to line b, and continue to W;
+//		// ...
+//		// then change to line c, and continue to Y.
+//		// The total trip will have m changes and will take approximately n minutes.
+//	}
 	// optimisationCriteria can be either 'time' or 'changes' i.e. optimize for the least of whichever is chosen on program initiation
 	// if there are multiple optimal results satisfying the chosen criterion, then output the one that optimises the other criterion
 }
