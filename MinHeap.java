@@ -24,14 +24,15 @@ public class MinHeap
         currentSize = 0;
     }
 
+    //displays the minHeap, will need modification
     public void display() 
     {
         for (int i = 0; i <=currentSize; i++) 
         {
             System.out.println(" " + mH[i].vertex + "   duration   " + mH[i].duration);
         }
-        System.out.println("________________________");
     }
+    //inserts nodes/stations into the minHeap
     public void insert(HeapNode x) 
     {
         currentSize++;
@@ -40,77 +41,84 @@ public class MinHeap
         indexes[x.vertex] = idx;
         bubbleUp(idx);
     }
+
+    //pushes value up to where it belongs
     public void bubbleUp(int pos) 
+    {
+        int parentIdx = pos/2;
+        int currentIdx = pos;
+        while (currentIdx > 0 && mH[parentIdx].duration > mH[currentIdx].duration) 
         {
-            int parentIdx = pos/2;
-            int currentIdx = pos;
-            while (currentIdx > 0 && mH[parentIdx].duration > mH[currentIdx].duration) 
-            {
-                HeapNode currentNode = mH[currentIdx];
-                HeapNode parentNode = mH[parentIdx];
+            HeapNode currentNode = mH[currentIdx];
+            HeapNode parentNode = mH[parentIdx];
 
-                //swap the positions
-                indexes[currentNode.vertex] = parentIdx;
-                indexes[parentNode.vertex] = currentIdx;
-                swap(currentIdx,parentIdx);
-                currentIdx = parentIdx;
-                parentIdx = parentIdx/2;
-            }
+            //swap the positions
+            indexes[currentNode.vertex] = parentIdx;
+            indexes[parentNode.vertex] = currentIdx;
+            swap(currentIdx,parentIdx);
+            currentIdx = parentIdx;
+            parentIdx = parentIdx/2;
         }
+    }
 
-        public HeapNode extractMin() 
-        {
-            HeapNode min = mH[1];
-            HeapNode lastNode = mH[currentSize];
+    //returns the smallest Node
+    public HeapNode extractMin() 
+    {
+        HeapNode min = mH[1];
+        HeapNode lastNode = mH[currentSize];
 //            update the indexes[] and move the last node to the top
-            indexes[lastNode.vertex] = 1;
-            mH[1] = lastNode;
-            mH[currentSize] = null;
-            sinkDown(1);
-            currentSize--;
-            return min;
-        }
+        indexes[lastNode.vertex] = 1;
+        mH[1] = lastNode;
+        mH[currentSize] = null;
+        sinkDown(1);
+        currentSize--;
+        return min;
+    }
 
-        public void sinkDown(int k) 
+    //basically bubble down
+    public void sinkDown(int k) 
+    {
+        int smallest = k;
+        int leftChildIdx = 2 * k;
+        int rightChildIdx = 2 * k+1;
+        if (leftChildIdx < heapSize() && mH[smallest].duration > mH[leftChildIdx].duration) 
         {
-            int smallest = k;
-            int leftChildIdx = 2 * k;
-            int rightChildIdx = 2 * k+1;
-            if (leftChildIdx < heapSize() && mH[smallest].duration > mH[leftChildIdx].duration) 
-            {
-                smallest = leftChildIdx;
-            }
-            if (rightChildIdx < heapSize() && mH[smallest].duration > mH[rightChildIdx].duration) 
-            {
-                smallest = rightChildIdx;
-            }
-            if (smallest != k) 
-            {
+            smallest = leftChildIdx;
+        }
+        if (rightChildIdx < heapSize() && mH[smallest].duration > mH[rightChildIdx].duration) 
+        {
+            smallest = rightChildIdx;
+        }
+        if (smallest != k) 
+        {
 
-                HeapNode smallestNode = mH[smallest];
-                HeapNode kNode = mH[k];
+            HeapNode smallestNode = mH[smallest];
+            HeapNode kNode = mH[k];
 
-                //swap the positions
-                indexes[smallestNode.vertex] = k;
-                indexes[kNode.vertex] = smallest;
-                swap(k, smallest);
-                sinkDown(smallest);
-            }
+            //swap the positions
+            indexes[smallestNode.vertex] = k;
+            indexes[kNode.vertex] = smallest;
+            swap(k, smallest);
+            sinkDown(smallest);
         }
-        public void swap(int a, int b) 
-        {
-            HeapNode temp = mH[a];
-            mH[a] = mH[b];
-            mH[b] = temp;
-        }
-        public boolean isEmpty() 
-        {
-            return currentSize == 0;
-        }
-        public int heapSize()
-        {
-            return currentSize;
-        }
+    }
+    //swaps 2 positions
+    public void swap(int a, int b) 
+    {
+        HeapNode temp = mH[a];
+        mH[a] = mH[b];
+        mH[b] = temp;
+    }
+    //checks if empty through the size
+    public boolean isEmpty() 
+    {
+        return currentSize == 0;
+    }
+    //getters
+    public int heapSize()
+    {
+        return currentSize;
+    }
 }
 //TODO wondering if the heapNode itself should have the station line??
 public class HeapNode
