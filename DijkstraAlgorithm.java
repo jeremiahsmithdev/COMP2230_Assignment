@@ -24,10 +24,13 @@ public class DijkstraAlgorithm
         
     }
 
+    //recieves the graph then sets first station as beginning vertix
+    //it then calculates all of the possibile shortest paths to every verticies
+    //using the 2nd station it finds the shortest path to a vertices with that same name
     public void getMinDuration(Graph graph, String station1, String station2)
     {
         int INFINITY = Integer.MAX_VALUE;
-        boolean[] SPT = new boolean[graph.getVertices().size()];
+        boolean[] visitedList = new boolean[graph.getVertices().size()];
 
         //Generate the heapnodes with the amount of vertices
         //all of the distances are set to inifinity initially;
@@ -40,7 +43,13 @@ public class DijkstraAlgorithm
         }
 
         //except for the initial node which is set to 0
-        heapNodes[graph.findVertices(station1)].duration = 0;
+        for(int i = 0; i < graph.getVertices().size(); i++)
+        {
+            if(graph.getVertices().get(i).getName().equals(station1))
+            {
+                heapNodes[i].duration = 0;
+            }
+        }
 
         //add all the vertices to MinHeap
         MinHeap minHeap = new MinHeap(graph.getVertices().size());
@@ -58,16 +67,13 @@ public class DijkstraAlgorithm
 
             //extracted vertex
             int extractedVertex = extracedNode.vertex;
-            SPT[extractedVertex] = true;
-
-//TODO I'm not sure how it will traverse through different lines
-//or even find the actual station it should be looking for
+            visitedList[extractedVertex] = true;
 
             //iterate through all the adjacent vertices
             for(int i = 0; i <graph.getEdges().size() ; i++)
             {
                 int destination = graph.getEdges().get(i).getDuration();
-                if(SPT[destination]==false)
+                if(visitedList[destination]==false)
                 {
                     ///check if duration needs an update or not
                     //means check total weight from source to vertex_V is less than
@@ -82,26 +88,26 @@ public class DijkstraAlgorithm
                     }
                 }
             }
-
-            public void print()
-            {
-                System.out.println("Figure this out later");
-            }
-            
-            public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
-            {
-                //get the index which duraction's needs a decrease
-                int index = minHeap.indexes[vertex];
-
-                //get the node and update its value from minheap
-//TODO HEAP NODE mh hasn't been created, since min heaap hasn't been made yet
-                HeapNode node = minHeap.mh[index];
-                node.duration = newKey;
-                //function within minHeap
-                minHeap.bubbleup(index);
-            }
-
         }
+            
+
+    }
+    public void print()
+    {
+        System.out.println("Figure this out later");
+    }
+    
+    public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
+    {
+        //get the index which duraction's needs a decrease
+        int index = minHeap.indexes[vertex];
+
+        //get the node and update its value from minheap
+//TODO HEAP NODE mh hasn't been created, since min heaap hasn't been made yet
+        HeapNode node = minHeap.mh[index];
+        node.duration = newKey;
+        //function within minHeap
+        minHeap.bubbleup(index);
     }
 
 }
