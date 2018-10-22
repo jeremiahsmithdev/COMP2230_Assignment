@@ -29,6 +29,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 // main class
 public class assign1
 {
+	private int one;
 	public static void main(String args[]) throws Exception
 	{
 		// String RailNetwork = args[0];	// the XML file will be given as a command line argument and savede to this variable
@@ -105,4 +106,11 @@ public class assign1
 	}
 	// optimisationCriteria can be either 'time' or 'changes' i.e. optimize for the least of whichever is chosen on program initiation
 	// if there are multiple optimal results satisfying the chosen criterion, then output the one that optimises the other criterion
+
+	/**
+	 * @return the one
+	 */
+	public int getOne() {
+		return one;
+	}
 }
