@@ -64,7 +64,7 @@ public class DijkstraAlgorithm
             HeapNode extractedNode = minHeap.extractMin();
 
             //extracted vertex
-            int extractedVertex = extracedNode.vertex;
+            int extractedVertex = extracedNode.getVertices();
             visitedList[extractedVertex] = true;
 
             //iterate through all the adjacent vertices
@@ -76,13 +76,13 @@ public class DijkstraAlgorithm
                     ///check if duration needs an update or not
                     //means check total weight from source to vertex_V is less than
                     //the current distance value, if yes then update the distance
-                    int newKey = heapNodes[extractedVertex].duration + graph.getEdges().get(i).getDuration();
-                    int currentKey = heapNodes[destination].duration;
+                    int newKey = heapNodes[extractedVertex].getDuration() + graph.getEdges().get(i).getDuration();
+                    int currentKey = heapNodes[destination].getDuration();
 
                     if(currentKey>newKey)
                     {
                         decreaseKey(minHeap, newKey, destination);
-                        heapNodes[destination].duration = newKey;
+                        heapNodes[destination].setDuration(newKey); 
                     }
                 }
             }
