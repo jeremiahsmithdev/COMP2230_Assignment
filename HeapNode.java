@@ -1,8 +1,15 @@
-//TODO wondering if the heapNode itself should have the station line??
+/**
+ * *
+ *  * assign1.java – Assignment1
+ *   * @author: Jeremiah Smith, Juyong Kim
+ *    * @student Number: c3238179 c3244203
+ *     * @version: 016/10/2018
+ *      * Description: node used in the minHeap
+ *       */
 public class HeapNode
 {
-    int vertex;
-    int duration;
+    private int vertex;
+    private int duration;
     //constructor
     public HeapNode()
     {
@@ -23,5 +30,14 @@ public class HeapNode
     public void setDuration(int duration)
     {
         this.duration = duration;
+    }
+    //getters
+    public int getVertex()
+    {
+        return vertex;
+    }
+    public int getDuration()
+    {
+        return duration;
     }
 }
