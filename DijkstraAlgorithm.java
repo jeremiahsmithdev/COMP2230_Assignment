@@ -24,6 +24,9 @@ public class DijkstraAlgorithm
         
     }
 
+    //recieves the graph then sets first station as beginning vertix
+    //it then calculates all of the possibile shortest paths to every verticies
+    //using the 2nd station it finds the shortest path to a vertices with that same name
     public void getMinDuration(Graph graph, String station1, String station2)
     {
         int INFINITY = Integer.MAX_VALUE;
@@ -40,7 +43,13 @@ public class DijkstraAlgorithm
         }
 
         //except for the initial node which is set to 0
-        heapNodes[graph.findVertices(station1)].duration = 0;
+        for(int i = 0; i < graph.getVertices().size(); i++)
+        {
+            if(graph.getVertices().get(i).getName().equals(station1))
+            {
+                heapNodes[i].duration = 0;
+            }
+        }
 
         //add all the vertices to MinHeap
         MinHeap minHeap = new MinHeap(graph.getVertices().size());
@@ -63,25 +72,25 @@ public class DijkstraAlgorithm
 //TODO I'm not sure how it will traverse through different lines
 //or even find the actual station it should be looking for
 
-            //iterate through all the adjacent vertices
-            for(int i = 0; i <graph.getEdges().size() ; i++)
+        //iterate through all the adjacent vertices
+        for(int i = 0; i <graph.getEdges().size() ; i++)
+        {
+            int destination = graph.getEdges().get(i).getDuration();
+            if(SPT[destination]==false)
             {
-                int destination = graph.getEdges().get(i).getDuration();
-                if(SPT[destination]==false)
-                {
-                    ///check if duration needs an update or not
-                    //means check total weight from source to vertex_V is less than
-                    //the current distance value, if yes then update the distance
-                    int newKey = heapNodes[extracetedVertex].duration + graph.getEdges().get(i).getDuration();
-                    int currentKey = heapNodes[destination].duration;
+                ///check if duration needs an update or not
+                //means check total weight from source to vertex_V is less than
+                //the current distance value, if yes then update the distance
+                int newKey = heapNodes[extracetedVertex].duration + graph.getEdges().get(i).getDuration();
+                int currentKey = heapNodes[destination].duration;
 
-                    if(currentKey>newKey)
-                    {
-                        decreaseKey(minHeap, newKey, destination);
-                        heapNodes[destination].duration = newKey;
-                    }
+                if(currentKey>newKey)
+                {
+                    decreaseKey(minHeap, newKey, destination);
+                    heapNodes[destination].duration = newKey;
                 }
             }
+        }
 
             public void print()
             {
