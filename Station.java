@@ -17,16 +17,18 @@ public class Station
 	private String Line;
 	private ArrayList<StationEdge> Edges;
 	private NodeList xmlEdges;
+	private int ID;
 
 	public Station()
 	{}
 
-	public Station(String Name, String Line, NodeList xmlEdges)
+	public Station(String Name, String Line, NodeList xmlEdges, int ID)
 	{
 		this.Name = Name;
 		this.Line = Line;
 		this.Edges = new ArrayList<StationEdge>();
 		this.xmlEdges = xmlEdges;
+		this.ID = ID;
 	}
 
 	public void initializeEdges(List<Station> stations)
@@ -68,5 +70,15 @@ public class Station
 	public String getLine()
 	{
 		return Line;
+	}
+
+	public int getID()
+	{
+		return ID;
+	}
+
+	public void setID(int ID)
+	{
+		this.ID = ID;
 	}
 }

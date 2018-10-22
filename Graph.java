@@ -14,7 +14,7 @@ public class Graph
 	private final List<Station> vertices;
 	private final List<StationEdge> edges;
 
-	public Graph(List<Station> vertices, List<StationEdge> edges)
+	public Graph(List<Station> vertices)//, List<StationEdge> edges)
 	{
 		this.vertices = vertices;	// vertices passed as stationList from main
 		this.edges = new ArrayList<StationEdge>();
@@ -22,16 +22,17 @@ public class Graph
 		// add the respective StationEdges for each Station
 		for (int i = 0; i < vertices.size(); i++)
 		{
-			for (int a = 0; a < vertices.get(i).getEdges().size(); i++)
+			for (int a = 0; a < vertices.get(i).getEdges().size(); a++)
 			{
 				//should this be 1 or i or a
-				edges.add(vertices.get(i).getEdges().get(1));
+				edges.add(vertices.get(i).getEdges().get(a));
+				// System.out.println("adds " + vertices.get(i).getEdges().get(a).getName() + " from line " + vertices.get(i).getEdges().get(a).getLine());
 			}
 		}
 	}
 
 	//getters
-	public List<Station> findVertices(String station1)
+	public Station findVertices(String station1)
 	{
 		Station destination = new Station();
 
