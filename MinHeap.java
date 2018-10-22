@@ -120,7 +120,7 @@ public class MinHeap
         return currentSize;
     }
 }
-//TODO wondering if the heapNode itself should have the station line??
+// TODO wondering if the heapNode itself should have the station line??
 public class HeapNode
 {
     int vertex;
