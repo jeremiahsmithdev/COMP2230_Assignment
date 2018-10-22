@@ -37,9 +37,7 @@ public class DijkstraAlgorithm
         HeapNode [] heapNodes = new HeapNode[graph.getVertices().size()];
         for(int i = 0; i < graph.getVertices().size(); i++)
         {
-            heapNodes[i] = new HeapNode();
-            heapNodes[i].vertex = graph.getVertices().get(i);
-            heapNodes[i].duration = INFINITY;
+            heapNodes[i] = new HeapNode(graph.getVertices().get(i),INFINITY);
         }
 
         //except for the initial node which is set to 0
@@ -47,7 +45,7 @@ public class DijkstraAlgorithm
         {
             if(graph.getVertices().get(i).getName().equals(station1))
             {
-                heapNodes[i].duration = 0;
+                heapNodes[i].setDuration(0);
             }
         }
 
@@ -78,7 +76,7 @@ public class DijkstraAlgorithm
                     ///check if duration needs an update or not
                     //means check total weight from source to vertex_V is less than
                     //the current distance value, if yes then update the distance
-                    int newKey = heapNodes[extracetedVertex].duration + graph.getEdges().get(i).getDuration();
+                    int newKey = heapNodes[extractedVertex].duration + graph.getEdges().get(i).getDuration();
                     int currentKey = heapNodes[destination].duration;
 
                     if(currentKey>newKey)

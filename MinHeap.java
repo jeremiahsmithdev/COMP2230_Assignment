@@ -19,8 +19,8 @@ public class MinHeap
         mH = new HeapNode[capacity + 1];
         indexes = new int[capacity];
         mH[0] = new HeapNode();
-        mH[0].duration = Integer.MIN_VALUE;
-        mH[0].vertex=-1;
+        mH[0].setDuration(Integer.MIN_VALUE);
+        mH[0].setVertex(-1);
         currentSize = 0;
     }
 
@@ -29,7 +29,7 @@ public class MinHeap
     {
         for (int i = 0; i <=currentSize; i++) 
         {
-            System.out.println(" " + mH[i].vertex + "   duration   " + mH[i].duration);
+            System.out.println(" " + mH[i].getVertex() + "   duration   " + mH[i].getDuration());
         }
     }
     //inserts nodes/stations into the minHeap
@@ -38,7 +38,7 @@ public class MinHeap
         currentSize++;
         int idx = currentSize;
         mH[idx] = x;
-        indexes[x.vertex] = idx;
+        indexes[x.getVertex()] = idx;
         bubbleUp(idx);
     }
 
@@ -47,14 +47,14 @@ public class MinHeap
     {
         int parentIdx = pos/2;
         int currentIdx = pos;
-        while (currentIdx > 0 && mH[parentIdx].duration > mH[currentIdx].duration) 
+        while (currentIdx > 0 && mH[parentIdx].getDuration() > mH[currentIdx].getDuration()) 
         {
             HeapNode currentNode = mH[currentIdx];
             HeapNode parentNode = mH[parentIdx];
 
             //swap the positions
-            indexes[currentNode.vertex] = parentIdx;
-            indexes[parentNode.vertex] = currentIdx;
+            indexes[currentNode.getVertex()] = parentIdx;
+            indexes[parentNode.getVertex()] = currentIdx;
             swap(currentIdx,parentIdx);
             currentIdx = parentIdx;
             parentIdx = parentIdx/2;
@@ -67,7 +67,7 @@ public class MinHeap
         HeapNode min = mH[1];
         HeapNode lastNode = mH[currentSize];
 //            update the indexes[] and move the last node to the top
-        indexes[lastNode.vertex] = 1;
+        indexes[lastNode.getVertex()] = 1;
         mH[1] = lastNode;
         mH[currentSize] = null;
         sinkDown(1);
@@ -81,11 +81,11 @@ public class MinHeap
         int smallest = k;
         int leftChildIdx = 2 * k;
         int rightChildIdx = 2 * k+1;
-        if (leftChildIdx < heapSize() && mH[smallest].duration > mH[leftChildIdx].duration) 
+        if (leftChildIdx < heapSize() && mH[smallest].getDuration() > mH[leftChildIdx].getDuration()) 
         {
             smallest = leftChildIdx;
         }
-        if (rightChildIdx < heapSize() && mH[smallest].duration > mH[rightChildIdx].duration) 
+        if (rightChildIdx < heapSize() && mH[smallest].getDuration() > mH[rightChildIdx].getDuration()) 
         {
             smallest = rightChildIdx;
         }
@@ -96,8 +96,8 @@ public class MinHeap
             HeapNode kNode = mH[k];
 
             //swap the positions
-            indexes[smallestNode.vertex] = k;
-            indexes[kNode.vertex] = smallest;
+            indexes[smallestNode.getVertex()] = k;
+            indexes[kNode.getVertex()] = smallest;
             swap(k, smallest);
             sinkDown(smallest);
         }
@@ -119,10 +119,4 @@ public class MinHeap
     {
         return currentSize;
     }
-}
-//TODO wondering if the heapNode itself should have the station line??
-public class HeapNode
-{
-    int vertex;
-    int duration;
 }
