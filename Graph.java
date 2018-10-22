@@ -2,12 +2,10 @@
  * *
  *  * Graph.java – Assignment1
  *   * @author: Jeremiah Smith, Juyong Kim
- *    * @student Number: c3238179 cXXXXXXX
- *     * @version: 017/10/2018
+ *    * @student Number: c3238179 c3244203
+ *     * @version: 017/10/2018 
  *      * Description: Describes a graph using Stations as vertices and StationEdges as Edges
  *       */
-
-// TODO NOTE: See resource - http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
 import java.util.List;
 import java.util.ArrayList;
 
@@ -26,11 +24,26 @@ public class Graph
 		{
 			for (int a = 0; a < vertices.get(i).getEdges().size(); i++)
 			{
+				//should this be 1 or i or a
 				edges.add(vertices.get(i).getEdges().get(1));
 			}
 		}
 	}
 
+	//getters
+	public List<Station> findVertices(String station1)
+	{
+		Station destination = new Station();
+
+		for(int i=0; i < vertices.size(); i++)
+		{
+			if(vertices.get(i).getName().equals(station1))
+			{
+				destination = vertices.get(i);
+			}
+		}
+		return destination;
+	}
 	public List<Station> getVertices()
 	{
 		return vertices;

@@ -2,12 +2,10 @@
  * *
  *  * StationEdge.java – Assignment1
  *   * @author: Jeremiah Smith, Juyong Kim
- *    * @student Number: c3238179 cXXXXXXX
+ *    * @student Number: c3238179 c3244203
  *     * @version: 016/10/2018
  *      * Description: Holds information to create and store a StationEdge object
  *       */
-// TODO modify according to http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
-
 public class StationEdge
 {
 	private String Name;
