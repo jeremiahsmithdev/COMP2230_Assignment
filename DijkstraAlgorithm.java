@@ -64,7 +64,7 @@ public class DijkstraAlgorithm
             HeapNode extractedNode = minHeap.extractMin();
 
             //extracted vertex
-            int extractedVertex = extracedNode.getVertices();
+            int extractedVertex = extractedNode.getVertices();
             visitedList[extractedVertex] = true;
 
             //iterate through all the adjacent vertices
