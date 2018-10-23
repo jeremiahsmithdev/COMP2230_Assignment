@@ -82,6 +82,7 @@ public class MinHeap
     //returns the smallest Node
     public HeapNode extractMin() 
     {
+<<<<<<< HEAD
 	// System.out.print("		"+1 + " " +mH[5].getComparator()+"		");
         HeapNode min = mH[0];
 	// System.out.print(2 + " " +mH[5].getComparator()+"		");
@@ -100,6 +101,16 @@ public class MinHeap
         currentSize--;
 	// System.out.print(8 + " " +mH[5].getComparator()+"		");
 	// System.out.print("min is  " +min.getComparator()+"		");
+=======
+        HeapNode min = mH[0];
+        HeapNode lastNode = mH[currentSize-1];
+//            update the indexes[] and move the last node to the top
+        indexes[lastNode.getVertex().getID()] = 0;
+        mH[0] = lastNode;
+        mH[currentSize] = new HeapNode();//null;
+        sinkDown(0);
+        currentSize--;
+>>>>>>> ca3fd5333459786400161945d6c253aea419eed4
 
         return min;
     }

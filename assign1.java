@@ -75,7 +75,11 @@ public class assign1
 		Graph graph = new Graph(stations);
 
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+<<<<<<< HEAD
 		String result = dijkstra.getMinPath("Bondi Junction", "Clyde");
+=======
+		String result = dijkstra.getMinPath("Lidcombe", "Erskineville");
+>>>>>>> ca3fd5333459786400161945d6c253aea419eed4
 		if (result != "")
 			System.out.println(result);
 		else
