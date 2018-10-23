@@ -53,9 +53,15 @@ public class HeapNode
 
 	public void updatePath(String prePath, StationEdge edge, HeapNode node)
 	{
+
 		if (visited == true)
 			path = "";		// path reset for update when old path has become redundant due to a newer and quicker route
-		path += prePath + "departed from (" + edge.getSource().getName() + ") and travelled for " + edge.getDuration() + " on the " + edge.getLine() + " and arrived at (" + edge.getDestination().getName() + ")	 current total is: __" + node.getComparator()+"__\n";
+		if (prePath.equals(""))		// first line
+			path += ", take line " + edge.getLine() + " to station " + edge.getDestination().getName() + ";\n";
+		else if (edge.getSource().getName().equals(edge.getDestination().getName()))// changing lines
+			path += prePath + " then change to line " + edge.getDestination().getLine() + ", and continue to " + edge.getDestination().getName() + ";\n";
+		else
+			path += prePath + "stay on line " + edge.getSource().getLine() + ", and continue to " + edge.getDestination().getName() + ";\n";
 		visited = true;
 	}
 }

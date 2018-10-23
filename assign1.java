@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder; 
 import javax.xml.parsers.DocumentBuilderFactory;
 // TODO THE RAIL NETWORK SHOULD BE PASSED TO YOUR PROGRAM AS AN INPUT
+// BUGS: using testNetwork, output is currently incorrect when going from Station "Five" to Station "One"
 // Q1
 // Q2 (extra)
 
@@ -37,7 +38,7 @@ public class assign1
 		// String optimisationCriteria args[3];
 		//
 		// XML FILE PARSING BEGIN
-		String RailNetwork = "TestNetwork.xml";	// "RailNetwork.xml"
+		String RailNetwork = "RailNetwork.xml";	// "RailNetwork.xml"
 		File file = new File(RailNetwork);	// this will be changed so that the rail network is passed to program as an input
 		// File file = new File(RailNetwork);		// done as above, commented out for easier testing
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory         // instantiates an instance of this library for parsing
@@ -74,7 +75,11 @@ public class assign1
 		Graph graph = new Graph(stations);
 
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-		System.out.println(dijkstra.getMinPath("Zero", "Five"));
+		String result = dijkstra.getMinPath("Bondi Junction", "Clyde");
+		if (result != "")
+			System.out.println(result);
+		else
+			System.out.println("There is no path");
 
 		    // graph.dijkstra_GetMinDistances(sourceVertex);
 

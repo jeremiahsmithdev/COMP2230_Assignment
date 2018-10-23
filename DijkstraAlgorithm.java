@@ -141,22 +141,27 @@ public class DijkstraAlgorithm
 	    // return heapNodes[5].getWeight();
 	// return heapNodes[222].getWeight();
     }
-        public String DijkstraResults(HeapNode[] resultSet, String source, String destination)
-	{
-		String answer;
-            for (int i = 0; i < graph.getVertices().size() ; i++) 
-            {
-		    // if (i == 0)
+    public String DijkstraResults(HeapNode[] resultSet, String source, String destination)
+    {
+	    int current = Integer.MAX_VALUE;
+	    String minPath = "";
+	    for (int i = 0; i < graph.getVertices().size() ; i++) 
+	    {
+		    if (graph.getVertices().get(i).getName().equals(destination) && resultSet[i].getComparator() < current)
+		    {
+			    current = resultSet[i].getComparator();
+			    minPath = "From " + source + resultSet[i].getPath();
+			    minPath += "From Station: " + source + " to vertex " + destination +
+				    " The total trip will take approximately " + resultSet[i].getComparator() + " minutes.";
+		    }
+	    }
 
-		     if (graph.getVertices().get(i).getName().equals(destination))
-		     {
-			 System.out.println("\n"+resultSet[i].getPath());
-			 System.out.println("From Station: " + source + " to vertex " + destination +
-			 		" distance: " + resultSet[i].getComparator());
-		     }
-            }
-	    return "";
-        }
+	    // for (int i = 0; i < resultSet.length; i++)
+	    // {
+		//     System.out.println(resultSet[i].getComparator());
+	    // }
+	    return minPath;
+    }
     
     public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
     {

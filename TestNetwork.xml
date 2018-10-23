@@ -122,6 +122,11 @@
 					<Line>TestLine</Line>
 					<Duration>15</Duration>
 				</StationEdge>
+				<StationEdge>
+					<Name>Zero</Name>
+					<Line>TheBypass</Line>
+					<Duration>6</Duration>
+				</StationEdge>
 			</StationEdges>
 		</Station>
 	</Stations>
