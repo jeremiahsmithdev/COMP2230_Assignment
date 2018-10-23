@@ -151,7 +151,7 @@ public class DijkstraAlgorithm
 		    {
 			    current = resultSet[i].getComparator();
 			    minPath = "From " + source + resultSet[i].getPath();
-			    minPath += "From Station: " + source + " to vertex " + destination +
+			    minPath += /*"From Station: " + source + " to vertex " + destination +*/
 				    " The total trip will take approximately " + resultSet[i].getComparator() + " minutes.";
 		    }
 	    }
