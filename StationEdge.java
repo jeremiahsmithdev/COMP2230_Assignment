@@ -15,6 +15,7 @@ public class StationEdge
 	private Station Source;
 	private Station Destination;
 	private int defaultTime;
+	private int changes;
 
 	//constructor
 	public StationEdge(String Name, String Line, int Duration, Station Source, Station Destination)
@@ -25,6 +26,7 @@ public class StationEdge
 		this.Source = Source;
 		this.Destination = Destination;
 		defaultTime = 1;
+		// changes = 0;
 	}
 
 	//getters
@@ -39,6 +41,15 @@ public class StationEdge
 	public int getDuration()
 	{
 		return Duration;
+	}
+	public int getValue(String optimisationCriteria)
+	{
+		int value = 0;
+		if (optimisationCriteria == "time")
+			value = Duration;
+		else if (optimisationCriteria == "changes")
+			value = changes;
+		return value;
 	}
 	public Station getSource()
 	{

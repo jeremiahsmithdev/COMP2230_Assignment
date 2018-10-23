@@ -8,7 +8,7 @@
  *       */
 import java.util.ArrayList;
 import java.util.List;
-import org.w3c.dom.Node;
+
 import org.w3c.dom.NodeList;
 
 public class Station
@@ -17,18 +17,18 @@ public class Station
 	private String Line;
 	private ArrayList<StationEdge> Edges;
 	private NodeList xmlEdges;
+	private int ID;
 
 	public Station()
-	{
+	{}
 
-	}
-
-	public Station(String Name, String Line, NodeList xmlEdges)
+	public Station(String Name, String Line, NodeList xmlEdges, int ID)
 	{
 		this.Name = Name;
 		this.Line = Line;
 		this.Edges = new ArrayList<StationEdge>();
 		this.xmlEdges = xmlEdges;
+		this.ID = ID;
 	}
 
 	public void initializeEdges(List<Station> stations)
@@ -48,8 +48,7 @@ public class Station
 	}
 	public Station findDestination(String name, String line, List<Station> stations)
 	{
-		Station destination = new Station();
-		for(int i=0; i < stations.size(); i++)
+		Station destination = new Station(); for(int i=0; i < stations.size(); i++)
 		{
 			if(stations.get(i).getName().equals(name) && stations.get(i).getLine().equals(line))
 			{
@@ -71,5 +70,15 @@ public class Station
 	public String getLine()
 	{
 		return Line;
+	}
+
+	public int getID()
+	{
+		return ID;
+	}
+
+	public void setID(int ID)
+	{
+		this.ID = ID;
 	}
 }
