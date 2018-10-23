@@ -15,6 +15,8 @@
 //so that i have a solid understanding of what the classes should be doing
 public class DijkstraAlgorithm
 {
+
+
     private Graph graph;
     private String station1,station2;
     private String optimisationCriteria = "time";	// hardcoded for now TODO set properly
@@ -61,6 +63,10 @@ public class DijkstraAlgorithm
         }
 //TODO not sure exactly how the minheap traverses
         //while minHeap is not empty
+
+	System.out.println("INITIAL HEAP:");
+	minHeap.display();
+
         while(!minHeap.isEmpty())
         {
             //extract the min
@@ -74,33 +80,51 @@ public class DijkstraAlgorithm
             // int extractedVertex = extractedNode.getVertices();
             Station extractedVertex = extractedNode.getVertex();
             visitedList[extractedVertex.getID()] = true;
+	    System.out.println("\n 						Extracted min is " + extractedVertex.getName() + " with value " + extractedNode.getComparator());
 
             //iterate through all the adjacent vertices
-            for(int i = 0; i <graph.getEdges().size() ; i++)
+            // for(int i = 0; i <graph.getEdges().size() ; i++)
+	    for (int i = 0; i < extractedVertex.getEdges().size(); i++)
             {
-		    StationEdge edge = graph.getEdges().get(i);
-                destination = graph.getEdges().get(i).getDestination().getID();//getValue(optimisationCriteria);
+		    // StationEdge edge = graph.getEdges().get(i);
+		    StationEdge edge = extractedVertex.getEdges().get(i);
+                destination = edge.getDestination().getID();//graph.getEdges().get(i).getDestination().getID();//getValue(optimisationCriteria);
                 if(visitedList[destination]==false)
                 {
                     ///check if duration needs an update or not
                     //means check total weight from source to vertex_V is less than
                     //the current distance value, if yes then update the distance
-                    int newKey = heapNodes[edge.getSource().getID()].getWeight() + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
+
+			System.out.println("UPDATING KEY for: " + edge.getDestination().getName() + ": " + heapNodes[extractedVertex.getID()].getComparator() + " += " + edge.getDuration() + " (SOURCE = " + edge.getSource().getName() + ")");
+
+
+                    int newKey = heapNodes[extractedVertex.getID()].getComparator() + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
+		    System.out.println("acquired newKey " + newKey);
 		    // System.out.println("From " + edge.getSource().getName() + " to " + edge.getDestination().getName());
 		    // System.out.println(" starting with " + heapNodes[edge.getSource().getID()].getWeight() + " and adding " + edge.getDuration());
 		    // System.out.println("result: " + newKey+"\n");
-                    int currentKey = heapNodes[destination].getWeight();
+                    int currentKey = heapNodes[destination].getComparator();
 
+
+		    // System.out.println("current key taken from " + );
+		    System.out.println("currentKey " + currentKey + " newKey " + newKey );
                     if(currentKey>newKey)
                     {
+			    System.out.println("UPDATE SUCCESS");
+
 			// System.out.println("path updated for weight " + edge.getDuration() +  " to destination " + destination);
                         decreaseKey(minHeap, newKey, destination);
                         heapNodes[destination].setWeight(newKey); 
 			// System.out.println(destination + " set to " + newKey);
 
 			String prePath = heapNodes[edge.getSource().getID()].getPath();
-			heapNodes[destination].updatePath(prePath, edge.getSource().getName(), edge.getDuration(), edge.getDestination().getName(), heapNodes[edge.getDestination().getID()]);
+			System.out.println("\n from " + edge.getSource().getName() + " to " + edge.getDestination().getName() + " in " + edge.getDuration());
+			// String prePath = heapNodes[extractedVertex.getID()].getPath();
+			// System.out.println("TRACING ---- " +prePath);
+			heapNodes[destination].updatePath(prePath, edge, heapNodes[edge.getDestination().getID()]);
                     }
+			System.out.println("MINHEAP DISPLAY: ");
+			minHeap.display();
                 }
             }
         }
@@ -113,33 +137,39 @@ public class DijkstraAlgorithm
             // }
 
 	    minHeap.display();
-	    return DijkstraResults(heapNodes, 0, 5);//station1, station2);
+	    return DijkstraResults(heapNodes, station1, station2);//station1, station2);
 	    // return heapNodes[5].getWeight();
 	// return heapNodes[222].getWeight();
     }
-        public String DijkstraResults(HeapNode[] resultSet, int sourceVertex, int destinationVertex)
+        public String DijkstraResults(HeapNode[] resultSet, String source, String destination)
 	{
+		String answer;
             for (int i = 0; i < graph.getVertices().size() ; i++) 
             {
-		    if (i == destinationVertex)
-		    {
-			System.out.println(resultSet[i].getPath());
-			System.out.println("Source Vertex: " + graph.getVertices().get(sourceVertex).getName() + " to vertex " + graph.getVertices().get(destinationVertex).getName() +
-					" distance: " + resultSet[i].getWeight());
-		    }
+		    // if (i == 0)
+
+		     if (graph.getVertices().get(i).getName().equals(destination))
+		     {
+			 System.out.println("\n"+resultSet[i].getPath());
+			 System.out.println("From Station: " + source + " to vertex " + destination +
+			 		" distance: " + resultSet[i].getComparator());
+		     }
             }
 	    return "";
         }
     
     public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
     {
+	    // System.out.println(newKey);
         //get the index which duraction's needs a decrease
         int index = minHeap.indexes[vertex];
 
         //get the node and update its value from minheap
 //TODO HEAP NODE mh hasn't been created, since min heaap hasn't been made yet
         HeapNode node = minHeap.mH[index];
-	System.out.println("minheap " +node.getWeight());
+
+	// System.out.println("key for vertex " +node.getVertex().getName() + " on line " + node.getVertex().getLine() + " is " + node.getWeight());
+	// System.out.println("minheap " +node.getWeight());
         node.setWeight(newKey);
         //function within minHeap
         minHeap.bubbleUp(index);

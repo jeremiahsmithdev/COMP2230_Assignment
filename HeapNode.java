@@ -41,7 +41,7 @@ public class HeapNode
 	{
 		return vertex;
 	}
-	public int getWeight()
+	public int getComparator()
 	{
 		return time;
 	}
@@ -51,11 +51,11 @@ public class HeapNode
 		return path;
 	}
 
-	public void updatePath(String prePath, String source, int edgeWeight, String destination, HeapNode node)
+	public void updatePath(String prePath, StationEdge edge, HeapNode node)
 	{
 		if (visited == true)
 			path = "";		// path reset for update when old path has become redundant due to a newer and quicker route
-		path += prePath + "departed from (" + source + ") and travelled for " + edgeWeight + " and arrived at (" + destination + ") current total is: " + node.getWeight()+" for node " + node.getVertex().getID()+" : " + time + " " + vertex.getID()+"\n";
+		path += prePath + "departed from (" + edge.getSource().getName() + ") and travelled for " + edge.getDuration() + " on the " + edge.getLine() + " and arrived at (" + edge.getDestination().getName() + ")	 current total is: __" + node.getComparator()+"__\n";
 		visited = true;
 	}
 }

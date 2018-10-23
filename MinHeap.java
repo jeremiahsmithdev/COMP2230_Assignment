@@ -18,9 +18,9 @@ public class MinHeap
         this.capacity = capacity;
         mH = new HeapNode[capacity + 1];
         indexes = new int[capacity];
-        mH[0] = new HeapNode();
+        // mH[0] = new HeapNode();
         // mH[0].setWeight(Integer.MIN_VALUE);		// ?????????
-        mH[0].setVertex(new Station());
+        // mH[0].setVertex(new Station());
         currentSize = 0;
     }
 
@@ -29,8 +29,9 @@ public class MinHeap
     {
         for (int i = 0; i < currentSize; i++) 
         {
-            System.out.println(" " + mH[i].getVertex() + "   duration   " + mH[i].getWeight());
+            System.out.println(" " + mH[i].getVertex().getName() + "   total   " + mH[i].getComparator());
         }
+	System.out.println();
     }
     public int size()
     {
@@ -39,12 +40,15 @@ public class MinHeap
     //inserts nodes/stations into the minHeap
     public void insert(HeapNode x) 
     {
-        currentSize++;
+	    // if (currentSize == 0)
+		//     mH[0] = x;
         int idx = currentSize;
         mH[idx] = x;
         indexes[x.getVertex().getID()] = idx;
         bubbleUp(idx);
-	    // System.out.println(mH[252].getWeight());
+
+	currentSize++;
+	    // System.out.println(mH[252].getComparator());
     }
 
     //pushes value up to where it belongs
@@ -53,14 +57,14 @@ public class MinHeap
         int parentIdx = pos/2;
         int currentIdx = pos;
 
-	    // System.out.println(mH[parentIdx].getVertex().getName() + " has " +mH[252].getWeight());
+	    // System.out.println(mH[parentIdx].getVertex().getName() + " has " +mH[252].getComparator());
 
-	    // System.out.println(mH[parentIdx].getWeight());
-	    // System.out.println(mH[currentIdx].getWeight());
+	    // System.out.println(mH[parentIdx].getComparator());
+	    // System.out.println(mH[currentIdx].getComparator());
 	    // System.out.println(mH[parentIdx].getVertex().getName());
 	    // System.out.println(mH[currentIdx].getVertex().getName());
 
-        while (currentIdx > 0 && mH[parentIdx].getWeight() > mH[currentIdx].getWeight()) 
+        while (currentIdx > 0 && mH[parentIdx].getComparator() > mH[currentIdx].getComparator()) 
         {
             HeapNode currentNode = mH[currentIdx];
             HeapNode parentNode = mH[parentIdx];
@@ -78,24 +82,24 @@ public class MinHeap
     //returns the smallest Node
     public HeapNode extractMin() 
     {
-	System.out.print("		"+1 + " " +mH[5].getWeight()+"		");
-        HeapNode min = mH[1];
-	System.out.print(2 + " " +mH[5].getWeight()+"		");
-        HeapNode lastNode = mH[currentSize];
-	System.out.print(3 + " " +lastNode.getWeight()+"		");
-	System.out.print(mH[5].getWeight()+"		");
+	// System.out.print("		"+1 + " " +mH[5].getComparator()+"		");
+        HeapNode min = mH[0];
+	// System.out.print(2 + " " +mH[5].getComparator()+"		");
+        HeapNode lastNode = mH[currentSize-1];
+	// System.out.print(3 + " " +lastNode.getComparator()+"		");
+	// System.out.print(mH[5].getComparator()+"		");
 //            update the indexes[] and move the last node to the top
-        indexes[lastNode.getVertex().getID()] = 1;
-	System.out.print(4 + " " +mH[5].getWeight()+"		");
-        mH[1] = lastNode;
-	System.out.print(5 + " " +mH[5].getWeight()+"		");
+        indexes[lastNode.getVertex().getID()] = 0;
+	// System.out.print(4 + " " +mH[5].getComparator()+"		");
+        mH[0] = lastNode;
+	// System.out.print(5 + " " +mH[5].getComparator()+"		");
         mH[currentSize] = new HeapNode();//null;
-	System.out.print(6 + " " +mH[5].getWeight()+"		");
-        sinkDown(1);
-	System.out.print(7 + " " +mH[5].getWeight()+"		");
+	// System.out.print(6 + " " +mH[5].getComparator()+"		");
+        sinkDown(0);
+	// System.out.print(7 + " " +mH[5].getComparator()+"		");
         currentSize--;
-	System.out.print(8 + " " +mH[5].getWeight()+"		");
-	System.out.print("min is  " +min.getWeight()+"		");
+	// System.out.print(8 + " " +mH[5].getComparator()+"		");
+	// System.out.print("min is  " +min.getComparator()+"		");
 
         return min;
     }
@@ -106,11 +110,11 @@ public class MinHeap
         int smallest = k;
         int leftChildIdx = 2 * k;
         int rightChildIdx = 2 * k+1;
-        if (leftChildIdx < heapSize() && mH[smallest].getWeight() > mH[leftChildIdx].getWeight()) 
+        if (leftChildIdx < heapSize() && mH[smallest].getComparator() > mH[leftChildIdx].getComparator()) 
         {
             smallest = leftChildIdx;
         }
-        if (rightChildIdx < heapSize() && mH[smallest].getWeight() > mH[rightChildIdx].getWeight()) 
+        if (rightChildIdx < heapSize() && mH[smallest].getComparator() > mH[rightChildIdx].getComparator()) 
         {
             smallest = rightChildIdx;
         }
