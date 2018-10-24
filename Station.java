@@ -33,12 +33,9 @@ public class Station
 	}
 
 	//functions
-
-	//saves the edges(Train lines) into the station object
-	//gets the attributes, name, line, duration of the edge
-	//and saves them into the station through a forloop
-	public void initializeEdges(List<Station> stations)
-	{
+	public void initializeEdges(List<Station> stations)						//saves the edges(Train lines) into the station object
+	{																		//gets the attributes, name, line, duration of the edge
+																			//and saves them into the station through a forloop
 		for (int i = 1; i < xmlEdges.getLength(); i = i + 2)
 		{
 			NodeList edgeAttributes = xmlEdges.item(i).getChildNodes();
@@ -54,13 +51,10 @@ public class Station
 		}
 	}
 	
-	//Based off the station name and line it is associated with
-	//returns the location of the vertice/station that you are looking
-	//for in the list of stations
-	public Station findDestination(String name, String line, List<Station> stations)
-	{
-		Station destination = new Station(); 
-
+	public Station findDestination(String name, String line, List<Station> stations)		
+	{																//Based off the station name and line it is associated with
+		Station destination = new Station(); 						//returns the location of the vertice/station that you are looking
+																	//for in the list of stations
 		for(int i=0; i < stations.size(); i++)
 		{
 			//if station name and line is the same set that station as destination
