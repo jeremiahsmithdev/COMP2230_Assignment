@@ -7,6 +7,7 @@
  *      * Description: Parses XML file and saves data as Station objects and associated StationEdge objects
  *       */
 import java.io.File;
+import java.util.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder; 
 import javax.xml.parsers.DocumentBuilderFactory;
+
 // TODO THE RAIL NETWORK SHOULD BE PASSED TO YOUR PROGRAM AS AN INPUT
 // BUGS: using testNetwork, output is currently incorrect when going from Station "Five" to Station "One"
 // Q1
@@ -38,7 +40,7 @@ public class assign1
 		// String optimisationCriteria args[3];
 		//
 		// XML FILE PARSING BEGIN
-		String RailNetwork = "TestNetwork.xml";	// "RailNetwork.xml"
+		String RailNetwork = "RailNetwork.xml";	// "RailNetwork.xml"
 		File file = new File(RailNetwork);	// this will be changed so that the rail network is passed to program as an input
 		// File file = new File(RailNetwork);		// done as above, commented out for easier testing
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory         // instantiates an instance of this library for parsing
@@ -73,9 +75,20 @@ public class assign1
 	// printData(stations);
 		// TODO - Create graph:
 		Graph graph = new Graph(stations);
-
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-		String result = dijkstra.getMinPath("Zero", "Five", "changes");
+
+//NEW CHANGE HERE
+//		//using for testing purposes
+//		Scanner scanner = new Scanner(System.in);
+//		System.out.println("Please enter the criteria: ");
+//		String crit = scanner.nextLine();
+//		System.out.println("Please enter the first station: ");
+//		String stat1 = scanner.nextLine();
+//		System.out.println("Please enter the second station: ");
+//		String stat2 = scanner.nextLine();
+//		String result = dijkstra.getMinPath(stat1, stat2, crit);
+
+		String result = dijkstra.getMinPath("Bondi Junction", "Clyde", "changes");
 		if (result != "")
 			System.out.println(result);
 		else
@@ -106,23 +119,23 @@ public class assign1
 	// optimisationCriteria can be either 'time' or 'changes' i.e. optimize for the least of whichever is chosen on program initiation
 	// if there are multiple optimal results satisfying the chosen criterion, then output the one that optimises the other criterion
 
-	public static void printData(List<Station> stations)
-	{
-		for (int i = 0; i < stations.size(); i++)
-		{
-			System.out.println("Station Name: " +stations.get(i).getName());
-			System.out.println("Line: "+stations.get(i).getLine());
-			for (int a = 0; a < stations.get(i).getEdges().size(); a++)
-			{
-				System.out.println("	Edge:");
-				System.out.println("		Name: "+stations.get(i).getEdges().get(a).getName());
-				System.out.println("		Line: "+stations.get(i).getEdges().get(a).getLine());
-				System.out.println("		Duration: "+stations.get(i).getEdges().get(a).getDuration());
-				System.out.println("		Source: "+stations.get(i).getEdges().get(a).getSource().getName());
-				System.out.println("		Destination: "+stations.get(i).getEdges().get(a).getDestination().getName());
-			}
-		}
-	}
+//	public static void printData(List<Station> stations)
+//	{
+//		for (int i = 0; i < stations.size(); i++)
+//		{
+//			System.out.println("Station Name: " +stations.get(i).getName());
+//			System.out.println("Line: "+stations.get(i).getLine());
+//			for (int a = 0; a < stations.get(i).getEdges().size(); a++)
+//			{
+//				System.out.println("	Edge:");
+//				System.out.println("		Name: "+stations.get(i).getEdges().get(a).getName());
+//				System.out.println("		Line: "+stations.get(i).getEdges().get(a).getLine());
+//				System.out.println("		Duration: "+stations.get(i).getEdges().get(a).getDuration());
+//				System.out.println("		Source: "+stations.get(i).getEdges().get(a).getSource().getName());
+//				System.out.println("		Destination: "+stations.get(i).getEdges().get(a).getDestination().getName());
+//			}
+//		}
+//	}
 	/**
 	 * @return the one
 	 */

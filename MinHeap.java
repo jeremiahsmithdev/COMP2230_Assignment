@@ -17,7 +17,7 @@ public class MinHeap
     public MinHeap(int capacity, String optimisationCriteria) 
     {
         this.capacity = capacity;
-	this.optimisationCriteria = optimisationCriteria;
+	    this.optimisationCriteria = optimisationCriteria;
         node = new HeapNode[capacity + 1];
         indexes = new int[capacity];
         // node[0] = new HeapNode();
@@ -41,9 +41,9 @@ public class MinHeap
     {
         for (int i = 0; i < currentSize; i++) 
         {
-            System.out.println(" " + node[i].getVertex().getName() + "   total   " + node[i].getComparator(optimisationCriteria));
+//            System.out.println(" " + node[i].getVertex().getName() + "   total   " + node[i].getComparator(optimisationCriteria));
         }
-	System.out.println();
+//	System.out.println();
     }
     public int size()
     {
@@ -59,7 +59,7 @@ public class MinHeap
         indexes[x.getVertex().getID()] = idx;
         bubbleUp(idx);
 
-	currentSize++;
+    	currentSize++;
 	    // System.out.println(node[252].getComparator(optimisationCriteria));
     }
 
@@ -76,6 +76,7 @@ public class MinHeap
 	    // System.out.println(node[parentIdx].getVertex().getName());
 	    // System.out.println(node[currentIdx].getVertex().getName());
 
+//Change this to a boolean function does all this and also checking if they are equal, takes in optimisation criteria ?? 
         while (currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria)) 
         {
             HeapNode currentNode = node[currentIdx];

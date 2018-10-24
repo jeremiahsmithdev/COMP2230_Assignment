@@ -46,6 +46,7 @@ public class Station
 			Edges.add(new StationEdge(name, line, duration, this , findDestination(name, line, stations)));
 		}
 	}
+	
 	public Station findDestination(String name, String line, List<Station> stations)
 	{
 		Station destination = new Station(); for(int i=0; i < stations.size(); i++)
@@ -58,11 +59,12 @@ public class Station
 		return destination;
 
 	}
+
+	//getters
 	public ArrayList<StationEdge> getEdges()
 	{
 		return Edges;
 	}
-
 	public String getName()
 	{
 		return Name;
@@ -71,12 +73,12 @@ public class Station
 	{
 		return Line;
 	}
-
 	public int getID()
 	{
 		return ID;
 	}
 
+	//setters
 	public void setID(int ID)
 	{
 		this.ID = ID;
