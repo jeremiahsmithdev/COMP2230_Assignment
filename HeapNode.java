@@ -27,6 +27,7 @@ public class HeapNode
 		this.vertex = vertex;
 		this.time = Integer.MAX_VALUE;
 		this.changes = 0;
+		//saves the path from source to this current heapNode
 		path = "";
 		visited = false;
 	}

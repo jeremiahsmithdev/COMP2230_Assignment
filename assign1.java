@@ -88,7 +88,7 @@ public class assign1
 //		String stat2 = scanner.nextLine();
 //		String result = dijkstra.getMinPath(stat1, stat2, crit);
 
-		String result = dijkstra.getMinPath("Bondi Junction", "Clyde", "changes");
+		String result = dijkstra.getMinPath("Bondi Junction", "Clyde", "time");
 		if (result != "")
 			System.out.println(result);
 		else

@@ -11,7 +11,7 @@ public class DijkstraAlgorithm
 {
     private Graph graph;
     private String station1,station2;
-    private String optimisationCriteria = "time";	// hardcoded for now TODO set properly
+    private String optimisationCriteria;	
     //don't think you really need anything in the constructor
     public DijkstraAlgorithm(Graph graph) 
     {
@@ -148,7 +148,7 @@ public class DijkstraAlgorithm
             if (graph.getVertices().get(i).getName().equals(destination))
 		    //if (graph.getVertices().get(i).getName().equals(destination) && resultSet[i].getComparator(optimisationCriteria) < current)
 		    {
-			    current = resultSet[i].getComparator(optimisationCriteria);
+			    //current = resultSet[i].getComparator(optimisationCriteria);
                 minPath = "From " + source + resultSet[i].getPath();
                 System.out.println("here ");
                     //if asks for time
@@ -159,10 +159,11 @@ public class DijkstraAlgorithm
                         " minutes and will have " + resultSet[i].getChanges() + " changes.";
                     }
                     //if asks for changes
-                    else if(this.optimisationCriteria.equals("changes"))
+                    //if(this.optimisationCriteria.equals("changes"))
+                    else
                     {
                         minPath += "From Station: " + source + " to vertex " + destination +
-				        " The total trip will have " + resultSet[i].getChanges() + " changes.";
+				        " The total trip will have " + resultSet[i].getChanges() + " station change'(s).";
                     }
             }
 
