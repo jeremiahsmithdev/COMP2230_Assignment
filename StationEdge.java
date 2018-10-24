@@ -8,10 +8,10 @@
  *       */
 public class StationEdge
 {
+	//variables
 	private String Name;
 	private String Line;
 	private int Duration;
-	//additions based off the vogella
 	private Station Source;
 	private Station Destination;
 	private int defaultTime;
@@ -26,7 +26,18 @@ public class StationEdge
 		this.Source = Source;
 		this.Destination = Destination;
 		defaultTime = 1;
-		// changes = 0;
+		changes = 0;
+	}
+
+	//functions
+	public int getValue(String optimisationCriteria)		//depening on optimisation criteria
+	{														//returns either the duration or changes
+		int value = 0;
+		if (optimisationCriteria == "time")
+			value = Duration;
+		else if (optimisationCriteria == "changes")
+			value = changes;
+		return value;
 	}
 
 	//getters
@@ -42,15 +53,6 @@ public class StationEdge
 	{
 		return Duration;
 	}
-	public int getValue(String optimisationCriteria)
-	{
-		int value = 0;
-		if (optimisationCriteria == "time")
-			value = Duration;
-		else if (optimisationCriteria == "changes")
-			value = changes;
-		return value;
-	}
 	public Station getSource()
 	{
 		return Source;
@@ -62,12 +64,5 @@ public class StationEdge
 	public int getDefault()
 	{
 		return defaultTime;
-	}
-	//side note, may or may not use
-	//used for printing 
-	@Override
-	public String toString()
-	{
-		return Name + " " + Destination;
 	}
 }
