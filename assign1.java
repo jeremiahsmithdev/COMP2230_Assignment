@@ -86,6 +86,10 @@ public class assign1
 //		String stat2 = scanner.nextLine();
 //		String result = dijkstra.getMinPath(stat1, stat2, crit);
 
+<<<<<<< HEAD
+=======
+		String result = dijkstra.getMinPath("Bondi Junction", "Clyde", "time");
+>>>>>>> bcfd4f831f4d5140466c3e3f7c8ab91c9e8d6249
 		if (result != "")
 			System.out.println(result);
 		else
