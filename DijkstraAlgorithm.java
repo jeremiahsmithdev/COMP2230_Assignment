@@ -1,5 +1,4 @@
 // import DijkstraUsingMinHeap.MinHeap;
-
 /**
  * *
  *  * assign1.java – Assignment1
@@ -8,22 +7,15 @@
  *     * @version: 016/10/2018
  *      * Description: DijkstraAlgorithm that goes through the graph to produce a minheap of results
  *       */
-
-//TODO MinHeap must be constructed since this algorithm runs on saving values into
-//the min heap, also dijkstra algorithm still not finished
-//TODO test if the values are readying through properly, just typing stuff up
-//so that i have a solid understanding of what the classes should be doing
 public class DijkstraAlgorithm
 {
-
-
     private Graph graph;
     private String station1,station2;
     private String optimisationCriteria = "time";	// hardcoded for now TODO set properly
     //don't think you really need anything in the constructor
     public DijkstraAlgorithm(Graph graph) 
     {
-	    this.graph = graph;
+        this.graph = graph;
     }
 
     //recieves the graph then sets first station as beginning vertex
@@ -31,8 +23,11 @@ public class DijkstraAlgorithm
     //using the 2nd station it finds the shortest path to a vertices with that same name
     public String getMinPath(String station1, String station2, String optimisationCriteria)
     {
+//NEW CHANGES HERE
+        this.optimisationCriteria = optimisationCriteria;
         int INFINITY = Integer.MAX_VALUE;
-	int destination = 5;
+        int destination = 5;
+        //visited list of boolean that is the size of all the vertices
         boolean[] visitedList = new boolean[graph.getVertices().size()];
 
         //Generate the heapnodes with the amount of vertices
@@ -42,7 +37,9 @@ public class DijkstraAlgorithm
         {
             heapNodes[i] = new HeapNode(graph.getVertices().get(i),INFINITY);
         }
-	System.out.println(heapNodes.length);
+
+        //Bug Testing
+//	    System.out.println(heapNodes.length);
 
         //except for the initial node which is set to 0
         for(int i = 0; i < graph.getVertices().size(); i++)
@@ -52,11 +49,10 @@ public class DijkstraAlgorithm
                 heapNodes[i].setComparator(0);
             }
         }
-	// heapNodes[sourceVertex].setWeeight(0);
 
         //add all the vertices to MinHeap
         MinHeap minHeap = new MinHeap(graph.getVertices().size(), optimisationCriteria);
-        // for(int i = 0; i < graph.getVertices().size(); i++)
+
         for(int i = 0; i < heapNodes.length; i++)
         {
             minHeap.insert(heapNodes[i]);
@@ -64,7 +60,7 @@ public class DijkstraAlgorithm
 //TODO not sure exactly how the minheap traverses
         //while minHeap is not empty
 
-	System.out.println("INITIAL HEAP:");
+//	System.out.println("INITIAL HEAP:");
 	minHeap.display();
 
         while(!minHeap.isEmpty())
@@ -80,7 +76,7 @@ public class DijkstraAlgorithm
             // int extractedVertex = extractedNode.getVertices();
             Station extractedVertex = extractedNode.getVertex();
             visitedList[extractedVertex.getID()] = true;
-	    System.out.println("\n 						Extracted min is " + extractedVertex.getName() + " with value " + extractedNode.getComparator(optimisationCriteria));
+//	    System.out.println("\n 						Extracted min is " + extractedVertex.getName() + " with value " + extractedNode.getComparator(optimisationCriteria));
 
             //iterate through all the adjacent vertices
             // for(int i = 0; i <graph.getEdges().size() ; i++)
@@ -95,11 +91,11 @@ public class DijkstraAlgorithm
                     //means check total weight from source to vertex_V is less than
                     //the current distance value, if yes then update the distance
 
-			System.out.println("UPDATING KEY for: " + edge.getDestination().getName() + ": " + heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + " += " + edge.getDuration() + " (SOURCE = " + edge.getSource().getName() + ")");
+//			System.out.println("UPDATING KEY for: " + edge.getDestination().getName() + ": " + heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + " += " + edge.getDuration() + " (SOURCE = " + edge.getSource().getName() + ")");
 
 
                     int newKey = heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
-		    System.out.println("acquired newKey " + newKey);
+//		    System.out.println("acquired newKey " + newKey);
 		    // System.out.println("From " + edge.getSource().getName() + " to " + edge.getDestination().getName());
 		    // System.out.println(" starting with " + heapNodes[edge.getSource().getID()].getWeight() + " and adding " + edge.getDuration());
 		    // System.out.println("result: " + newKey+"\n");
@@ -107,10 +103,10 @@ public class DijkstraAlgorithm
 
 
 		    // System.out.println("current key taken from " + );
-		    System.out.println("currentKey " + currentKey + " newKey " + newKey );
+//		    System.out.println("currentKey " + currentKey + " newKey " + newKey );
                     if(currentKey>newKey)
                     {
-			    System.out.println("UPDATE SUCCESS");
+//			    System.out.println("UPDATE SUCCESS");
 
 			// System.out.println("path updated for weight " + edge.getDuration() +  " to destination " + destination);
                         decreaseKey(minHeap, newKey, destination);
@@ -118,12 +114,12 @@ public class DijkstraAlgorithm
 			// System.out.println(destination + " set to " + newKey);
 
 			String prePath = heapNodes[edge.getSource().getID()].getPath();
-			System.out.println("\n from " + edge.getSource().getName() + " to " + edge.getDestination().getName() + " in " + edge.getDuration());
+//			System.out.println("\n from " + edge.getSource().getName() + " to " + edge.getDestination().getName() + " in " + edge.getDuration());
 			// String prePath = heapNodes[extractedVertex.getID()].getPath();
 			// System.out.println("TRACING ---- " +prePath);
 			heapNodes[destination].updatePath(prePath, edge, heapNodes[edge.getDestination().getID()]);
                     }
-			System.out.println("MINHEAP DISPLAY: ");
+//			System.out.println("MINHEAP DISPLAY: ");
 			minHeap.display();
                 }
             }
@@ -147,13 +143,29 @@ public class DijkstraAlgorithm
 	    String minPath = "";
 	    for (int i = 0; i < graph.getVertices().size() ; i++) 
 	    {
-		    if (graph.getVertices().get(i).getName().equals(destination) && resultSet[i].getComparator(optimisationCriteria) < current)
+//NEW CHANGES HERE
+            //asks for time
+            if (graph.getVertices().get(i).getName().equals(destination))
+		    //if (graph.getVertices().get(i).getName().equals(destination) && resultSet[i].getComparator(optimisationCriteria) < current)
 		    {
 			    current = resultSet[i].getComparator(optimisationCriteria);
-			    minPath = "From " + source + resultSet[i].getPath();
-			    minPath += "From Station: " + source + " to vertex " + destination +
-				    " The total trip will take approximately " + resultSet[i].getComparator(optimisationCriteria) + " minutes and will have " + resultSet[i].getChanges() + " changes.";
-		    }
+                minPath = "From " + source + resultSet[i].getPath();
+                System.out.println("here ");
+                    //if asks for time
+                    if(this.optimisationCriteria.equals("time"))
+                    {
+                        minPath += "From Station: " + source + " to vertex " + destination +
+                        " The total trip will take approximately " + resultSet[i].getComparator(optimisationCriteria) + 
+                        " minutes and will have " + resultSet[i].getChanges() + " changes.";
+                    }
+                    //if asks for changes
+                    else if(this.optimisationCriteria.equals("changes"))
+                    {
+                        minPath += "From Station: " + source + " to vertex " + destination +
+				        " The total trip will have " + resultSet[i].getChanges() + " changes.";
+                    }
+            }
+
 	    }
 
 	    // for (int i = 0; i < resultSet.length; i++)
