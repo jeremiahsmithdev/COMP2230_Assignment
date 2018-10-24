@@ -12,7 +12,8 @@ public class HeapNode
 	private String path;
 
 	private Station vertex;
-	private int time = Integer.MAX_VALUE;		// very unstable, needs to be properly set with a constructor in the MinHeap class
+	private int time;// = Integer.MAX_VALUE;		// very unstable, needs to be properly set with a constructor in the MinHeap class
+	private int changes;
 	//constructor
 	public HeapNode()
 	{
@@ -32,23 +33,32 @@ public class HeapNode
 	{
 		this.vertex = vertex;
 	}
-	public void setWeight(int time)
+	public void setComparator(int time)//, int changes)
 	{
-		this.time = time;
+			this.time = time;
+			// this.changes = changes;
 	}
 	//getters
 	public Station getVertex()
 	{
 		return vertex;
 	}
-	public int getComparator()
+	public int getComparator(String criteria)
 	{
-		return time;
+		if (criteria.equals("time"))
+			return time;
+		else
+			return changes;
 	}
 
 	public String getPath()
 	{
 		return path;
+	}
+
+	public int getChanges()
+	{
+		return changes;
 	}
 
 	public void updatePath(String prePath, StationEdge edge, HeapNode node)
@@ -59,7 +69,10 @@ public class HeapNode
 		if (prePath.equals(""))		// first line
 			path += ", take line " + edge.getLine() + " to station " + edge.getDestination().getName() + ";\n";
 		else if (edge.getSource().getName().equals(edge.getDestination().getName()))// changing lines
+		{
+			changes++;
 			path += prePath + " then change to line " + edge.getDestination().getLine() + ", and continue to " + edge.getDestination().getName() + ";\n";
+		}
 		else
 			path += prePath + "stay on line " + edge.getSource().getLine() + ", and continue to " + edge.getDestination().getName() + ";\n";
 		visited = true;

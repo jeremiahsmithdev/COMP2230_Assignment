@@ -38,7 +38,7 @@ public class assign1
 		// String optimisationCriteria args[3];
 		//
 		// XML FILE PARSING BEGIN
-		String RailNetwork = "RailNetwork.xml";	// "RailNetwork.xml"
+		String RailNetwork = "TestNetwork.xml";	// "RailNetwork.xml"
 		File file = new File(RailNetwork);	// this will be changed so that the rail network is passed to program as an input
 		// File file = new File(RailNetwork);		// done as above, commented out for easier testing
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory         // instantiates an instance of this library for parsing
@@ -75,7 +75,7 @@ public class assign1
 		Graph graph = new Graph(stations);
 
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-		String result = dijkstra.getMinPath("Lidcombe", "Erskineville");
+		String result = dijkstra.getMinPath("Zero", "Five", "changes");
 		if (result != "")
 			System.out.println(result);
 		else

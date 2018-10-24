@@ -8,20 +8,32 @@
  *       */
 public class MinHeap
 {
-    int capacity;
-    int currentSize;
-    HeapNode[] mH;
-    int [] indexes; // used to decrease the duration
+    private int capacity;
+    private int currentSize;
+    private HeapNode[] node;
+    private int [] indexes; // used to decrease the duration
+    private String optimisationCriteria;
 
-    public MinHeap(int capacity) 
+    public MinHeap(int capacity, String optimisationCriteria) 
     {
         this.capacity = capacity;
-        mH = new HeapNode[capacity + 1];
+	this.optimisationCriteria = optimisationCriteria;
+        node = new HeapNode[capacity + 1];
         indexes = new int[capacity];
-        // mH[0] = new HeapNode();
-        // mH[0].setWeight(Integer.MIN_VALUE);		// ?????????
-        // mH[0].setVertex(new Station());
+        // node[0] = new HeapNode();
+        // node[0].setWeight(Integer.MIN_VALUE);		// ?????????
+        // node[0].setVertex(new Station());
         currentSize = 0;
+    }
+
+    public int getIndex(int index)
+    {
+	    return indexes[index];
+    }
+
+    public HeapNode getHeapNode(int index)
+    {
+	    return node[index];
     }
 
     //displays the minHeap, will need modification
@@ -29,7 +41,7 @@ public class MinHeap
     {
         for (int i = 0; i < currentSize; i++) 
         {
-            System.out.println(" " + mH[i].getVertex().getName() + "   total   " + mH[i].getComparator());
+            System.out.println(" " + node[i].getVertex().getName() + "   total   " + node[i].getComparator(optimisationCriteria));
         }
 	System.out.println();
     }
@@ -41,14 +53,14 @@ public class MinHeap
     public void insert(HeapNode x) 
     {
 	    // if (currentSize == 0)
-		//     mH[0] = x;
+		//     node[0] = x;
         int idx = currentSize;
-        mH[idx] = x;
+        node[idx] = x;
         indexes[x.getVertex().getID()] = idx;
         bubbleUp(idx);
 
 	currentSize++;
-	    // System.out.println(mH[252].getComparator());
+	    // System.out.println(node[252].getComparator(optimisationCriteria));
     }
 
     //pushes value up to where it belongs
@@ -57,17 +69,17 @@ public class MinHeap
         int parentIdx = pos/2;
         int currentIdx = pos;
 
-	    // System.out.println(mH[parentIdx].getVertex().getName() + " has " +mH[252].getComparator());
+	    // System.out.println(node[parentIdx].getVertex().getName() + " has " +node[252].getComparator(optimisationCriteria));
 
-	    // System.out.println(mH[parentIdx].getComparator());
-	    // System.out.println(mH[currentIdx].getComparator());
-	    // System.out.println(mH[parentIdx].getVertex().getName());
-	    // System.out.println(mH[currentIdx].getVertex().getName());
+	    // System.out.println(node[parentIdx].getComparator(optimisationCriteria));
+	    // System.out.println(node[currentIdx].getComparator(optimisationCriteria));
+	    // System.out.println(node[parentIdx].getVertex().getName());
+	    // System.out.println(node[currentIdx].getVertex().getName());
 
-        while (currentIdx > 0 && mH[parentIdx].getComparator() > mH[currentIdx].getComparator()) 
+        while (currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria)) 
         {
-            HeapNode currentNode = mH[currentIdx];
-            HeapNode parentNode = mH[parentIdx];
+            HeapNode currentNode = node[currentIdx];
+            HeapNode parentNode = node[parentIdx];
 
 
             //swap the positions
@@ -82,12 +94,12 @@ public class MinHeap
     //returns the smallest Node
     public HeapNode extractMin() 
     {
-        HeapNode min = mH[0];
-        HeapNode lastNode = mH[currentSize-1];
+        HeapNode min = node[0];
+        HeapNode lastNode = node[currentSize-1];
 //            update the indexes[] and move the last node to the top
         indexes[lastNode.getVertex().getID()] = 0;
-        mH[0] = lastNode;
-        mH[currentSize] = new HeapNode();//null;
+        node[0] = lastNode;
+        node[currentSize] = new HeapNode();//null;
         sinkDown(0);
         currentSize--;
 
@@ -100,19 +112,19 @@ public class MinHeap
         int smallest = k;
         int leftChildIdx = 2 * k;
         int rightChildIdx = 2 * k+1;
-        if (leftChildIdx < heapSize() && mH[smallest].getComparator() > mH[leftChildIdx].getComparator()) 
+        if (leftChildIdx < heapSize() && node[smallest].getComparator(optimisationCriteria) > node[leftChildIdx].getComparator(optimisationCriteria)) 
         {
             smallest = leftChildIdx;
         }
-        if (rightChildIdx < heapSize() && mH[smallest].getComparator() > mH[rightChildIdx].getComparator()) 
+        if (rightChildIdx < heapSize() && node[smallest].getComparator(optimisationCriteria) > node[rightChildIdx].getComparator(optimisationCriteria)) 
         {
             smallest = rightChildIdx;
         }
         if (smallest != k) 
         {
 
-            HeapNode smallestNode = mH[smallest];
-            HeapNode kNode = mH[k];
+            HeapNode smallestNode = node[smallest];
+            HeapNode kNode = node[k];
 
             //swap the positions
             indexes[smallestNode.getVertex().getID()] = k;
@@ -124,9 +136,9 @@ public class MinHeap
     //swaps 2 positions
     public void swap(int a, int b) 
     {
-        HeapNode temp = mH[a];
-        mH[a] = mH[b];
-        mH[b] = temp;
+        HeapNode temp = node[a];
+        node[a] = node[b];
+        node[b] = temp;
     }
     //checks if empty through the size
     public boolean isEmpty() 
