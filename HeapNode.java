@@ -24,6 +24,7 @@ public class HeapNode
 	{
 		this.vertex = vertex;
 		this.time = Integer.MAX_VALUE;
+		this.changes = 0;
 		path = "";
 		visited = false;
 	}
@@ -54,6 +55,11 @@ public class HeapNode
 	public String getPath()
 	{
 		return path;
+	}
+
+	public int getTime()
+	{
+		return time;
 	}
 
 	public int getChanges()
