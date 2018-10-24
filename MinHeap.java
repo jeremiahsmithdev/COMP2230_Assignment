@@ -77,8 +77,8 @@ public class MinHeap
 	    // System.out.println(node[currentIdx].getVertex().getName());
 
 //Change this to a boolean function does all this and also checking if they are equal, takes in optimisation criteria ?? 
-        while(checkCriteria(pos))
-        //while (currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria)) 
+        // while(checkCriteria(pos))
+        while (currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria)) 
         {
             HeapNode currentNode = node[currentIdx];
             HeapNode parentNode = node[parentIdx];
@@ -92,18 +92,18 @@ public class MinHeap
             parentIdx = parentIdx/2;
         }
     }
-//NEW CHANGES HERE
-    public boolean checkCriteria(int pos)
-    {
-        int parentIdx = pos/2;
-        int currentIdx = pos;
-
-        if(currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria))
-        {
-            return true;
-        }
-        return false;
-    }
+// //NEW CHANGES HERE
+//     public boolean checkCriteria(int pos)
+//     {
+//         int parentIdx = pos/2;
+//         int currentIdx = pos;
+//
+//         if(currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria))
+//         {
+//             return true;
+//         }
+//         return false;
+//     }
 
     //returns the smallest Node
     public HeapNode extractMin() 

@@ -15,6 +15,7 @@ public class HeapNode
 	private Station vertex;
 	private int time;
 	private int changes;
+	private boolean firstChange;
 
 	//constructors
 	public HeapNode()
@@ -30,6 +31,7 @@ public class HeapNode
 		//saves the path from source to this current heapNode
 		path = "";
 		visited = false;
+		firstChange = true;
 	}
 
 	//setters
@@ -73,58 +75,30 @@ public class HeapNode
 
 	public void upChanges()
 	{
-		this.changes++;
+		changes++;
 	}
 
 	//this is the thing i need to fix
-	public void updatePath(String prePath, StationEdge edge, HeapNode node)
+	public void updatePath(String prePath, StationEdge edge, HeapNode node, String finalDestination)
 	{
-		// path reset for update when old path has become redundant due to a newer and quicker route
-		if (visited == true)
-			path = "";
+		path = prePath;
 		// first line
 		if (prePath.equals(""))		
-			path += ", take line " + edge.getLine() + " to station " + edge.getDestination().getName() + ";\n";
-//NEW CHANGE HERE			
-		//changing lines but in same station aka same station, differen line
-		else if(edge.getSource().getName().equals(edge.getDestination().getName()) && !edge.getSource().getLine().equals(edge.getDestination().getLine()))
 		{
-//			//testing
-//			changes++;
-//			path += prePath + " then change to line " + edge.getDestination().getLine() + ", and continue to " + edge.getDestination().getName() + edge.getSource().getLine()+"<-is source line, is destination line->"+edge.getDestination().getLine()+";\n";
+			path = "From " + edge.getSource().getName() + " take line " + edge.getLine() + " to station ";
+		}
 
+
+		// changes lines
+		if (edge.getSource().getName().equals(edge.getDestination().getName()))
+		{
+			// changes++;
 			node.upChanges();
-			path += prePath + "then change to line " + edge.getDestination().getLine() + ", at " + edge.getDestination().getName() + " station"+ ";\n";
-		}
-		// changing lines
-		else if (edge.getSource().getName().equals(edge.getDestination().getName()))
-		{
-//			//testing
-//			changes++;
-//			path += prePath + " then change to line " + edge.getDestination().getLine() + ", and continue to " + edge.getDestination().getName() + edge.getSource().getLine()+"<-is source line, is destination line->"+edge.getDestination().getLine()+";\n";
-
-			node.upChanges();
-			path += prePath + " then change to line " + edge.getDestination().getLine() + ", and continue to " + edge.getDestination().getName() + ";\n";
-		}
-		// Stay on current line
-		else
-		{
-			path += prePath + "stay on line " + edge.getSource().getLine() + ", and continue to " + edge.getDestination().getName() + ";\n";
+			path += edge.getSource().getName() + ";\nthen change to line " + edge.getDestination().getLine() + ", and continue to station ";
 		}
 
-		visited = true;
+		// last station
+		if (edge.getDestination().getName().equals(finalDestination))
+			path += vertex.getName() + ";\n";
 	}
-
-	// calculate best route between two stations according to optimisationCriteria
-//	public void bestRoute(String stationOne, String stationTwo, String optimisationCriteria)
-//	{
-//		// OUTPUTS AS FOLLOWS:
-//		// From X, take line a to station Z;
-//		// then change to line b, and continue to W;
-//		// ...
-//		// then change to line c, and continue to Y.
-//		// The total trip will have m changes and will take approximately n minutes.
-//	}
-	// optimisationCriteria can be either 'time' or 'changes' i.e. optimize for the least of whichever is chosen on program initiation
-	// if there are multiple optimal results satisfying the chosen criterion, then output the one that optimises the other criterion
 }
