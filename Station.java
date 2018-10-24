@@ -6,22 +6,23 @@
  *     * @version: 016/10/2018
  *      * Description: Holds information to create and store a Station object
  *       */
+//Libraries
 import java.util.ArrayList;
 import java.util.List;
-
 import org.w3c.dom.NodeList;
 
 public class Station
 {
+	//variables
 	private String Name;
 	private String Line;
 	private ArrayList<StationEdge> Edges;
 	private NodeList xmlEdges;
 	private int ID;
 
+	//constructor(s)
 	public Station()
 	{}
-
 	public Station(String Name, String Line, NodeList xmlEdges, int ID)
 	{
 		this.Name = Name;
@@ -31,26 +32,38 @@ public class Station
 		this.ID = ID;
 	}
 
+	//functions
+
+	//saves the edges(Train lines) into the station object
+	//gets the attributes, name, line, duration of the edge
+	//and saves them into the station through a forloop
 	public void initializeEdges(List<Station> stations)
 	{
 		for (int i = 1; i < xmlEdges.getLength(); i = i + 2)
 		{
-//			System.out.println(i);
 			NodeList edgeAttributes = xmlEdges.item(i).getChildNodes();
 			String name = edgeAttributes.item(1).getTextContent();
-//			System.out.println(name);
 			String line = edgeAttributes.item(3).getTextContent();
-//			System.out.println(line);
 			int duration = Integer.parseInt(edgeAttributes.item(5).getTextContent());
-//			System.out.println("duration = "+duration);
 			Edges.add(new StationEdge(name, line, duration, this , findDestination(name, line, stations)));
+			//BugTesting
+//			System.out.println(i);
+//			System.out.println(name);
+//			System.out.println(line);
+//			System.out.println("duration = "+duration);
 		}
 	}
 	
+	//Based off the station name and line it is associated with
+	//returns the location of the vertice/station that you are looking
+	//for in the list of stations
 	public Station findDestination(String name, String line, List<Station> stations)
 	{
-		Station destination = new Station(); for(int i=0; i < stations.size(); i++)
+		Station destination = new Station(); 
+
+		for(int i=0; i < stations.size(); i++)
 		{
+			//if station name and line is the same set that station as destination
 			if(stations.get(i).getName().equals(name) && stations.get(i).getLine().equals(line))
 			{
 				destination = stations.get(i);
@@ -58,6 +71,12 @@ public class Station
 		}
 		return destination;
 
+	}
+
+	//setters
+	public void setID(int ID)
+	{
+		this.ID = ID;
 	}
 
 	//getters
@@ -76,11 +95,5 @@ public class Station
 	public int getID()
 	{
 		return ID;
-	}
-
-	//setters
-	public void setID(int ID)
-	{
-		this.ID = ID;
 	}
 }
