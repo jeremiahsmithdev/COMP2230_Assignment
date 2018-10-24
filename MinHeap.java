@@ -102,7 +102,6 @@ public class MinHeap
         node[currentSize] = new HeapNode();//null;
         sinkDown(0);
         currentSize--;
-
         return min;
     }
 
