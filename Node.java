@@ -10,32 +10,84 @@
  *       */
 public class Node implements Comparable<Node>
 {
+	//variables
 	private boolean visited;
 	private String path;
 	private Station vertex;
 	private int time;
 	private int changes;
-	private boolean firstChange;
 	private String criterion;
 
 	//constructors
-	public Node()
+	public Node()											//default constructor
 	{
 		this.vertex = new Station();
 		this.time = Integer.MAX_VALUE;
 		this.changes = Integer.MAX_VALUE;
 		criterion = "";
 	}
-	public Node(Station vertex, int time, String criterion)
-	{
+	public Node(Station vertex, int time, String criterion)	//node instantiated with the vertex, time 
+	{														//and criterion(time/changes)
 		this.vertex = vertex;
 		this.time = Integer.MAX_VALUE;
 		this.changes = Integer.MAX_VALUE;
 		this.criterion = criterion;
-		//saves the path from source to this current heapNode
-		path = "";
-		visited = false;
-		firstChange = true;
+		path = "";											//saves the path from source to this current Node
+		visited = false;									//checks if node has been visited
+	}
+
+	//functions
+	public void updatePath(String prePath, StationEdge edge, Node node, String finalDestination)
+	{
+		//updates paths, concatenates the neccesary print out to path which is saved at the node
+		//so that the code tester can visually see the results better
+
+		path = prePath;
+		//adds first line
+		if (prePath.equals(""))		
+		{
+			path += "From " + edge.getSource().getName() + " take line " + edge.getLine() + " to station ";
+		}
+
+		//adds changes lines
+		if (edge.getSource().getName().equals(edge.getDestination().getName()))
+		{
+			path += edge.getSource().getName() + ";\nthen change to line " + edge.getDestination().getLine() + ", and continue to station ";
+		}
+
+		//adds last station
+		if (edge.getDestination().getName().equals(finalDestination))
+		{
+			path += vertex.getName() + ";\n";
+		}
+	}
+
+	//controls sorting of nodes in the heap by comparing which path is better based on criteria
+	public int compareTo(Node node)
+	{
+		if (getComparator() > node.getComparator())
+		{
+			return 1;
+		}
+		else if (getComparator() == node.getComparator())
+		{
+			if (getSecondComparator() > node.getSecondComparator())
+			{
+				return 1;
+			}
+			else if (getSecondComparator() < node.getSecondComparator())
+			{
+				return -1;
+			}
+
+			return 0;
+		}
+		else if (getComparator() < node.getComparator())
+		{
+			return -1;
+		}
+
+		return 0;
 	}
 
 	//setters
@@ -47,7 +99,6 @@ public class Node implements Comparable<Node>
 	{
 		this.time = time;
 	}
-
 	public void setChanges(int changes)
 	{
 		this.changes = changes;
@@ -62,73 +113,26 @@ public class Node implements Comparable<Node>
 	{
 		return path;
 	}
-	//returns comparator that is asked for
-	public int getComparator()
-	{
+	public int getComparator()				//returns main comparision variable used for dijkstras Algorithm
+	{										//used to calculate the minimum time or changes path
 		if (criterion.equals("time"))
 			return time;
 		else
 			return changes;
 	}
-	public int getSecondComparator()
-	{
-		if (criterion.equals("changes"))
+	public int getSecondComparator()		//returns 2nd comparision variable used for dijkstras Algorithm
+	{										//used to calculate prefered path, if main comparator value
+		if (criterion.equals("changes"))	//between verticies is the same
 			return time;
 		else
 			return changes;
 	}
-
 	public int getTime()
 	{
 		return time;
 	}
-
 	public int getChanges()
 	{
 		return changes;
-	}
-
-
-	//this is the thing i need to fix
-	public void updatePath(String prePath, StationEdge edge, Node node, String finalDestination)
-	{
-		path = prePath;
-		// first line
-		if (prePath.equals(""))		
-		{
-			path += "From " + edge.getSource().getName() + " take line " + edge.getLine() + " to station ";
-		}
-
-
-		// changes lines
-		if (edge.getSource().getName().equals(edge.getDestination().getName()))
-		{
-			// changes++;
-			// node.incrementChanges();
-			path += edge.getSource().getName() + ";\nthen change to line " + edge.getDestination().getLine() + ", and continue to station ";
-		}
-
-		// last station
-		if (edge.getDestination().getName().equals(finalDestination))
-			path += vertex.getName() + ";\n";
-	}
-
-	// controls sorting of nodes in the heap by comparing which path is better based on criteria
-	public int compareTo(Node node)
-	{
-		// System.out.println("comparing " + vertex.getName() + " and " + node.getVertex().getName());
-		if (getComparator() > node.getComparator())
-			return 1;
-		else if (getComparator() == node.getComparator())
-		{
-			if (getSecondComparator() > node.getSecondComparator())
-				return 1;
-			else if (getSecondComparator() < node.getSecondComparator())
-				return -1;
-			return 0;
-		}
-		else if (getComparator() < node.getComparator())
-			return -1;
-		return 0;
 	}
 }
