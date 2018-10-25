@@ -11,12 +11,15 @@ import java.util.ArrayList;
 
 public class Graph
 {
+	//variables
 	private final List<Station> vertices;
 	private final List<StationEdge> edges;
 
-	public Graph(List<Station> vertices)//, List<StationEdge> edges)
+	//constructor
+	public Graph(List<Station> vertices)
 	{
-		this.vertices = vertices;	// vertices passed as stationList from main
+		// vertices passed as stationList from main
+		this.vertices = vertices;	
 		this.edges = new ArrayList<StationEdge>();
 
 		// add the respective StationEdges for each Station
@@ -24,16 +27,14 @@ public class Graph
 		{
 			for (int a = 0; a < vertices.get(i).getEdges().size(); a++)
 			{
-				//should this be 1 or i or a
 				edges.add(vertices.get(i).getEdges().get(a));
-				// System.out.println("adds " + vertices.get(i).getEdges().get(a).getName() + " from line " + vertices.get(i).getEdges().get(a).getLine());
 			}
 		}
 	}
 
-	//getters
-	public Station findVertices(String station1)
-	{
+	//functions
+	public Station findVertices(String station1)	//recieves a station name via string searches through the list of stations
+	{												//and returns the verticies with the same name as the string
 		Station destination = new Station();
 
 		for(int i=0; i < vertices.size(); i++)
@@ -45,6 +46,8 @@ public class Graph
 		}
 		return destination;
 	}
+
+	//getters
 	public List<Station> getVertices()
 	{
 		return vertices;

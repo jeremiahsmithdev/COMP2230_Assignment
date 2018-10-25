@@ -5,9 +5,14 @@
 		<Line>TestLine</Line>
 		<StationEdges>
 			<StationEdge>
+				<Name>Four</Name>
+				<Line>TestLine</Line>
+				<Duration>5</Duration>
+			</StationEdge>
+			<StationEdge>
 				<Name>Two</Name>
 				<Line>TestLine</Line>
-				<Duration>2</Duration>
+				<Duration>3</Duration>
 			</StationEdge>
 			<StationEdge>
 				<Name>Three</Name>
@@ -43,6 +48,11 @@
 		<Line>TestLine</Line>
 		<StationEdges>
 			<StationEdge>
+				<Name>Four</Name>
+				<Line>TestLine</Line>
+				<Duration>5</Duration>
+			</StationEdge>
+			<StationEdge>
 				<Name>Five</Name>
 				<Line>TestLine</Line>
 				<Duration>1</Duration>
@@ -65,8 +75,19 @@
 		<Line>TestLine</Line>
 		<StationEdges>
 			<StationEdge>
+				<Name>Six</Name>
+				<Line>sex</Line>
+				<Duration>1</Duration>
+			</StationEdge>
+		</StationEdges>
+	</Station>
+	<Station>
+		<Name>Six</Name>
+		<Line>sex</Line>
+		<StationEdges>
+			<StationEdge>
 				<Name>Four</Name>
-				<Line>TestLine</Line>
+				<Line>sex</Line>
 				<Duration>1</Duration>
 			</StationEdge>
 		</StationEdges>
@@ -74,6 +95,12 @@
 	<Station>
 		<Name>Four</Name>
 		<Line>TheBypass</Line>
+		<StationEdges>
+		</StationEdges>
+	</Station>
+	<Station>
+		<Name>Four</Name>
+		<Line>sex</Line>
 		<StationEdges>
 		</StationEdges>
 	</Station>
