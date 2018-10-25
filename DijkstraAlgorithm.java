@@ -84,19 +84,14 @@ public class DijkstraAlgorithm
 					//means check total weight from source to vertex_V is less than
 					//the current distance value, if yes then update the distance
 
-
-
-
-
 					int newChanges = heapNodes[extractedVertex.getID()].getChanges();
-					int currentKey = heapNodes[destination].getComparator(optimisationCriteria);
-					int newTime = heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
-
-
-					if(newTime < currentKey)
+					int currentChanges = heapNodes[extractedVertex.getID()].getChanges();
+					int currentKeyOne = heapNodes[destination].getComparator(optimisationCriteria);
+					int newKeyOne = heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
+					if(newKeyOne < currentKeyOne)
 					{
-						decreaseKey(minHeap, newTime, destination);
-						heapNodes[destination].setTime(newTime); 
+						decreaseKey(minHeap, newKeyOne, destination);
+						heapNodes[destination].setTime(newKeyOne); 
 
 						// increment changes when source = destination
 						if (edge.getDestination().getName().equals(edge.getSource().getName()))
@@ -106,8 +101,29 @@ public class DijkstraAlgorithm
 						String prePath = heapNodes[edge.getSource().getID()].getPath();
 						heapNodes[destination].updatePath(prePath, edge, heapNodes[edge.getDestination().getID()], station2);
 					}
+					else if(newKeyOne == currentKeyOne)
+					{
+						// increment changes when source = destination											//same
+						if (edge.getDestination().getName().equals(edge.getSource().getName()))
+							newChanges++;
+						heapNodes[destination].setChanges(newChanges);
+						//						System.out.println("5");
+						//if the new changes is slower, update it as the new shortest path
+						if(newChanges < currentChanges)
+							//if(currentChangesKey < newChangesKey)
+						{
+							decreaseKey(minHeap, newKeyOne, destination);
+							//!!changes made here check with jerry
+							heapNodes[destination].setTime(newKeyOne); 
+
+							String prePath = heapNodes[edge.getSource().getID()].getPath();
+							heapNodes[destination].updatePath(prePath, edge, heapNodes[edge.getDestination().getID()], station2);
+						}
+						//if not it just ignores and moves onto the next verticies
+					}
 				}
 			}
+
 		}
 
 		minHeap.display();
@@ -121,8 +137,9 @@ public class DijkstraAlgorithm
 		String minPath = "";// = "From " + source;
 		for (int i = 0; i < graph.getVertices().size() ; i++) 
 		{
-			if (graph.getVertices().get(i).getName().equals(destination) && resultSet[i].getComparator(optimisationCriteria) < current)
+			if (graph.getVertices().get(i).getName().equals(destination))// && resultSet[i].getComparator(optimisationCriteria) < current)
 			{
+				current = resultSet[i].getComparator(optimisationCriteria);
 				minPath += resultSet[i].getPath();	// add travel information
 				minPath += "The total trip will take approximately " + resultSet[i].getTime() + // add travel statistics
 					" minutes and will have " + resultSet[i].getChanges() + " changes.";

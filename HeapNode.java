@@ -91,7 +91,7 @@ public class HeapNode
 		// first line
 		if (prePath.equals(""))		
 		{
-			path = "From " + edge.getSource().getName() + " take line " + edge.getLine() + " to station ";
+			path = "\nFrom " + edge.getSource().getName() + " take line " + edge.getLine() + " to station ";
 		}
 
 

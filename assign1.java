@@ -27,9 +27,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class assign1
 {
-	private static String RailNetwork = "RailNetwork.xml";
-	private static String stationOne = "Glenfield";
-	private static String stationTwo = "Carlingford";
+	private static String RailNetwork = "TestNetwork.xml";
+	private static String stationOne = "Zero";
+	private static String stationTwo = "Five";
 	private static String optimisationCriteria = "time";
 
 	public static void main(String args[]) throws Exception
@@ -42,8 +42,6 @@ public class assign1
 			String optimisationCriteria = args[3];
 		}
 
-		                                                                               // XML FILE PARSING BEGIN
-		String RailNetwork = "RailNetwork.xml";                                        // "RailNetwork.xml"
 		File file = new File(RailNetwork);                                             // this will be changed so that the rail network is passed to program as an input
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory         // instantiates an instance of this library for parsing
 			.newInstance();

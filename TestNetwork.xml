@@ -51,6 +51,11 @@
 				<Line>TheBypass</Line>
 				<Duration>1</Duration>
 			</StationEdge>
+			<StationEdge>
+				<Name>Five</Name>
+				<Line>TestLine</Line>
+				<Duration>100</Duration>
+			</StationEdge>
 		</StationEdges>
 	</Station>
 	<Station>
@@ -71,7 +76,7 @@
 			<StationEdge>
 				<Name>Five</Name>
 				<Line>TestLine</Line>
-				<Duration>6</Duration>
+				<Duration>100</Duration>
 			</StationEdge>
 		</StationEdges>
 	</Station>
@@ -98,7 +103,7 @@
 			<StationEdge>
 				<Name>Five</Name>
 				<Line>TheBypass</Line>
-				<Duration>4</Duration>
+				<Duration>95</Duration>
 			</StationEdge>
 		</StationEdges>
 		</Station>
