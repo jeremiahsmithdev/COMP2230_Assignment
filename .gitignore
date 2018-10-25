@@ -1,0 +1,6 @@
+*.class
+tags
+.classpath
+.project
+MyNewClass/
+test.java
