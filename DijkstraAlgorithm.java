@@ -9,6 +9,7 @@
  *       */
 public class DijkstraAlgorithm
 {
+	//variables
 	private Graph graph;
 	private String station1,station2;
 	private String criterion;	
@@ -19,8 +20,9 @@ public class DijkstraAlgorithm
 	private int destination;
 	private Node heapNodes[];
 	private Node last;
-	//don't think you really need anything in the constructor
-	public DijkstraAlgorithm(Graph graph) 
+
+	//constructor
+	public DijkstraAlgorithm(Graph graph) //recieves graph made of station and stationEdges
 	{
 		this.graph = graph;
 		this.graphSize = graph.getVertices().size();
@@ -90,12 +92,16 @@ public class DijkstraAlgorithm
 					int currentChangeKey = heapNodes[extractedVertex.getID()].getChanges();
 					// increment changes when source = destination
 					if (edge.getDestination().getName().equals(edge.getSource().getName()))	// increment changes when source = destination
+					{
 						newChangeKey++;
+					}
 
 					if(criterion.equals("time") && newTimeKey <= currentTimeKey)
 					{
 						if (newChangeKey > currentChangeKey && newTimeKey == currentTimeKey)	// prevent unnecessary updates
+						{
 							newChangeKey = currentChangeKey;
+						}	
 						heapNodes[destination].setTime(newTimeKey); 
 						heapNodes[destination].setChanges(newChangeKey);
 						decreaseKey(minHeap, newTimeKey, destination);
@@ -105,7 +111,9 @@ public class DijkstraAlgorithm
 					else if (criterion.equals("changes") && newChangeKey <= currentChangeKey)
 					{
 						if (newTimeKey > currentTimeKey && newChangeKey == currentChangeKey)// prevent unnecessary updates
+						{
 							newTimeKey = currentTimeKey;
+						}
 						heapNodes[destination].setTime(newTimeKey); 
 						heapNodes[destination].setChanges(newChangeKey);
 						decreaseKey(minHeap, newChangeKey, destination);
