@@ -28,8 +28,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class assign1
 {
 	private static String RailNetwork = "RailNetwork.xml";
-	private static String stationOne = "Hornsby";
-	private static String stationTwo = "Bondi Junction";
+	private static String stationOne = "Glenfield";
+	private static String stationTwo = "Carlingford";
 	private static String optimisationCriteria = "time";
 
 	public static void main(String args[]) throws Exception

@@ -43,7 +43,7 @@ public class DijkstraAlgorithm
 		{
 			if(graph.getVertices().get(i).getName().equals(station1))
 			{
-				heapNodes[i].setComparator(0);
+				heapNodes[i].setTime(0);
 			}
 		}
 
@@ -86,14 +86,22 @@ public class DijkstraAlgorithm
 
 
 
-					int newKey = heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
+
+
+					int newChanges = heapNodes[extractedVertex.getID()].getChanges();
 					int currentKey = heapNodes[destination].getComparator(optimisationCriteria);
+					int newTime = heapNodes[extractedVertex.getID()].getComparator(optimisationCriteria) + edge.getDuration();//getValue(optimisationCriteria);//abbrev...
 
 
-					if(newKey < currentKey)
+					if(newTime < currentKey)
 					{
-						decreaseKey(minHeap, newKey, destination);
-						heapNodes[destination].setComparator(newKey); 
+						decreaseKey(minHeap, newTime, destination);
+						heapNodes[destination].setTime(newTime); 
+
+						// increment changes when source = destination
+						if (edge.getDestination().getName().equals(edge.getSource().getName()))
+							newChanges++;
+						heapNodes[destination].setChanges(newChanges);
 
 						String prePath = heapNodes[edge.getSource().getID()].getPath();
 						heapNodes[destination].updatePath(prePath, edge, heapNodes[edge.getDestination().getID()], station2);
@@ -125,7 +133,7 @@ public class DijkstraAlgorithm
 		return minPath;
 	}
 
-	public void decreaseKey(MinHeap minHeap, int newKey, int vertex)
+	public void decreaseKey(MinHeap minHeap, int newTime, int vertex)
 	{
 		//get the index which duraction's needs a decrease
 		// int index = minHeap.indexes[vertex];
@@ -135,7 +143,7 @@ public class DijkstraAlgorithm
 		//TODO HEAP NODE mh hasn't been created, since min heaap hasn't been made yet
 		HeapNode node = minHeap.getHeapNode(index);
 
-		node.setComparator(newKey);
+		node.setTime(newTime);
 
 		//function within minHeap
 		minHeap.bubbleUp(index);

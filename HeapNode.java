@@ -39,10 +39,20 @@ public class HeapNode
 	{
 		this.vertex = vertex;
 	}
-	public void setComparator(int time)//, int changes)
+	// public void setComparator(int time)//, int changes)
+	// {
+	// 		this.time = time;
+	// 		// this.changes = changes;
+	// }
+
+	public void setTime(int time)
 	{
-			this.time = time;
-			// this.changes = changes;
+		this.time = time;
+	}
+
+	public void setChanges(int changes)
+	{
+		this.changes = changes;
 	}
 
 	//getters
@@ -73,10 +83,6 @@ public class HeapNode
 		return changes;
 	}
 
-	public void upChanges()
-	{
-		changes++;
-	}
 
 	//this is the thing i need to fix
 	public void updatePath(String prePath, StationEdge edge, HeapNode node, String finalDestination)
@@ -93,7 +99,7 @@ public class HeapNode
 		if (edge.getSource().getName().equals(edge.getDestination().getName()))
 		{
 			// changes++;
-			node.upChanges();
+			// node.incrementChanges();
 			path += edge.getSource().getName() + ";\nthen change to line " + edge.getDestination().getLine() + ", and continue to station ";
 		}
 
