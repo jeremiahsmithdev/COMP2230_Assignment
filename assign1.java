@@ -27,9 +27,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class assign1
 {
-	private static String RailNetwork = "RailNetwork.xml";
-	private static String stationOne = "Glenfield";
-	private static String stationTwo = "Carlingford";
+	private static String RailNetwork = "test.xml";
+	private static String stationOne = "One";
+	private static String stationTwo = "Four";
 	private static String optimisationCriteria = "time";
 
 	public static void main(String args[]) throws Exception

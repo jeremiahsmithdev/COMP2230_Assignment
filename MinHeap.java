@@ -41,7 +41,7 @@ public class MinHeap
     {
         for (int i = 0; i < currentSize; i++) 
         {
-//            System.out.println(" " + node[i].getVertex().getName() + "   total   " + node[i].getComparator(optimisationCriteria));
+           System.out.println("\n\n" + node[i].getPath());
         }
 //	System.out.println();
     }
@@ -69,16 +69,10 @@ public class MinHeap
         int parentIdx = pos/2;
         int currentIdx = pos;
 
-	    // System.out.println(node[parentIdx].getVertex().getName() + " has " +node[252].getComparator(optimisationCriteria));
-
-	    // System.out.println(node[parentIdx].getComparator(optimisationCriteria));
-	    // System.out.println(node[currentIdx].getComparator(optimisationCriteria));
-	    // System.out.println(node[parentIdx].getVertex().getName());
-	    // System.out.println(node[currentIdx].getVertex().getName());
-
 //Change this to a boolean function does all this and also checking if they are equal, takes in optimisation criteria ?? 
         // while(checkCriteria(pos))
-        while (currentIdx > 0 && node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria)) 
+	
+        while (currentIdx > 0 && compareTo(node[currentIdx], node[parentIdx]))//node[parentIdx].getComparator(optimisationCriteria) > node[currentIdx].getComparator(optimisationCriteria)) 
         {
             HeapNode currentNode = node[currentIdx];
             HeapNode parentNode = node[parentIdx];
@@ -91,6 +85,15 @@ public class MinHeap
             currentIdx = parentIdx;
             parentIdx = parentIdx/2;
         }
+    }
+    public boolean compareTo(HeapNode parent, HeapNode current)
+    {
+	    if (current.getComparator(optimisationCriteria) < parent.getComparator(optimisationCriteria))
+		    return true;
+	    else if (current.getComparator(optimisationCriteria) == parent.getComparator(optimisationCriteria))
+		    if (current.getChanges() < parent.getChanges())
+			    return true;
+	    return false;
     }
 // //NEW CHANGES HERE
 //     public boolean checkCriteria(int pos)
@@ -125,11 +128,11 @@ public class MinHeap
         int smallest = k;
         int leftChildIdx = 2 * k;
         int rightChildIdx = 2 * k+1;
-        if (leftChildIdx < heapSize() && node[smallest].getComparator(optimisationCriteria) > node[leftChildIdx].getComparator(optimisationCriteria)) 
+        if (leftChildIdx < heapSize() && compareTo(node[leftChildIdx], node[smallest]))//node[smallest].getComparator(optimisationCriteria) > node[leftChildIdx].getComparator(optimisationCriteria)) 
         {
             smallest = leftChildIdx;
         }
-        if (rightChildIdx < heapSize() && node[smallest].getComparator(optimisationCriteria) > node[rightChildIdx].getComparator(optimisationCriteria)) 
+        if (rightChildIdx < heapSize() && compareTo(node[rightChildIdx], node[smallest]))//node[smallest].getComparator(optimisationCriteria) > node[rightChildIdx].getComparator(optimisationCriteria)) 
         {
             smallest = rightChildIdx;
         }

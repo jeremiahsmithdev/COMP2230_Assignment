@@ -93,7 +93,7 @@
 	</Station>
 	<Station>
 		<Name>Two</Name>
-		<Line>TheBypass</Line>
+		<Line>TestLine</Line>
 		<StationEdges>
 			<StationEdge>
 				<Name>Two</Name>
@@ -103,7 +103,7 @@
 			<StationEdge>
 				<Name>Five</Name>
 				<Line>TheBypass</Line>
-				<Duration>95</Duration>
+				<Duration>5</Duration>
 			</StationEdge>
 		</StationEdges>
 		</Station>
