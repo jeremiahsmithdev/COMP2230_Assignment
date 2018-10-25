@@ -43,12 +43,6 @@ public class Node implements Comparable<Node>
 	{
 		this.vertex = vertex;
 	}
-	// public void setComparator(int time)//, int changes)
-	// {
-	// 		this.time = time;
-	// 		// this.changes = changes;
-	// }
-
 	public void setTime(int time)
 	{
 		this.time = time;
@@ -119,6 +113,7 @@ public class Node implements Comparable<Node>
 			path += vertex.getName() + ";\n";
 	}
 
+	// controls sorting of nodes in the heap by comparing which path is better based on criteria
 	public int compareTo(Node node)
 	{
 		// System.out.println("comparing " + vertex.getName() + " and " + node.getVertex().getName());

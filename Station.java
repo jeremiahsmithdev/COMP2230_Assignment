@@ -46,11 +46,6 @@ public class Station
 			String line = edgeAttributes.item(3).getTextContent();
 			int duration = Integer.parseInt(edgeAttributes.item(5).getTextContent());
 			Edges.add(new StationEdge(name, line, duration, this , findDestination(name, line, stations)));
-			//BugTesting
-//			System.out.println(i);
-//			System.out.println(name);
-//			System.out.println(line);
-//			System.out.println("duration = "+duration);
 		}
 	}
 	
